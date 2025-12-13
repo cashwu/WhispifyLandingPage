@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隱私政策 - Whispify</title>
+    <meta name="description" content="Whispify 隱私政策 - 了解我們如何保護您的隱私">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Outfit', 'Noto Sans TC', 'sans-serif'],
+                        body: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                    },
+                    colors: {
+                        violet: {
+                            50: '#F5F3FF',
+                            100: '#EDE9FE',
+                            200: '#DDD6FE',
+                            300: '#C4B5FD',
+                            400: '#A78BFA',
+                            500: '#8B5CF6',
+                            600: '#7C3AED',
+                            700: '#6D28D9',
+                            800: '#5B21B6',
+                            900: '#4C1D95',
+                        },
+                        cyan: {
+                            400: '#22D3EE',
+                            500: '#06B6D4',
+                            600: '#0891B2',
+                        },
+                        dark: {
+                            abyss: '#050208',
+                            primary: '#0A0612',
+                            secondary: '#110B1A',
+                            elevated: '#1A1025',
+                            surface: '#241832',
+                            border: '#2D1F3D',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        /* Noise Texture Overlay */
+        .noise-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Mesh Gradient Background */
+        .mesh-gradient {
+            background:
+                radial-gradient(ellipse 80% 60% at 10% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 80% at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 100% 50% at 50% 0%, rgba(167, 139, 250, 0.06) 0%, transparent 40%),
+                linear-gradient(180deg, #050208 0%, #0A0612 50%, #110B1A 100%);
+        }
+
+        /* Enhanced Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 50%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(26, 16, 37, 0.9) 0%, rgba(17, 11, 26, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(124, 58, 237, 0.15);
+            position: relative;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.4), transparent);
+            border-radius: inherit;
+        }
+
+        /* Floating Gradient Orbs */
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .orb-purple {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, transparent 70%);
+        }
+
+        .orb-cyan {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+        }
+
+        /* Content Styling */
+        .privacy-content h2 {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #A78BFA;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-content h3 {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #C4B5FD;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .privacy-content p {
+            color: #9CA3AF;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-content li {
+            color: #9CA3AF;
+            line-height: 1.8;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-content li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #7C3AED, #06B6D4);
+            border-radius: 50%;
+        }
+
+        .privacy-content strong {
+            color: #E5E7EB;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body class="mesh-gradient text-white min-h-screen font-body">
+    <!-- Noise Texture Overlay -->
+    <div class="noise-texture"></div>
+
+    <!-- Background Orbs -->
+    <div class="gradient-orb orb-purple absolute top-20 -left-48"></div>
+    <div class="gradient-orb orb-cyan absolute bottom-40 -right-32"></div>
+
+    <!-- Header -->
+    <header class="py-6 relative z-10">
+        <div class="container mx-auto px-6">
+            <a href="index.html" class="flex items-center gap-3 w-fit group">
+                <img src="app-icon.png" alt="Whispify" class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
+                <span class="font-display font-semibold text-lg gradient-text">Whispify</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 py-12">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <!-- Title -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">
+                    <span class="gradient-text">隱私政策</span>
+                </h1>
+                <p class="text-gray-400">最後更新日期：2025 年 1 月</p>
+            </div>
+
+            <!-- Content Card -->
+            <div class="glass-card rounded-3xl p-8 md:p-12">
+                <div class="privacy-content">
+                    <!-- Introduction -->
+                    <p class="text-lg text-gray-300">
+                        Whispify 致力於保護您的隱私。本隱私政策說明我們的應用程式如何處理您的資料，以及我們採取的隱私保護措施。
+                    </p>
+
+                    <div class="highlight-box">
+                        <p class="text-cyan-400 font-semibold">
+                            核心原則：Whispify 的語音辨識功能完全在您的 Mac 本機執行，您的影片和音訊檔案不會上傳至任何伺服器。
+                        </p>
+                    </div>
+
+                    <!-- Section 1 -->
+                    <h2>1. 資料收集</h2>
+                    <p>Whispify 不會收集、儲存或傳送您的個人資料至我們的伺服器。我們不使用任何分析工具或追蹤技術。</p>
+
+                    <h3>我們不收集的資料：</h3>
+                    <ul>
+                        <li>個人身份資訊（姓名、電子郵件等）</li>
+                        <li>您的影片或音訊檔案</li>
+                        <li>使用行為或分析數據</li>
+                        <li>裝置識別碼或追蹤資訊</li>
+                    </ul>
+
+                    <!-- Section 2 -->
+                    <h2>2. 本機語音辨識</h2>
+                    <p>Whispify 使用 WhisperKit（基於 Apple CoreML）在您的 Mac 本機執行語音辨識。這意味著：</p>
+                    <ul>
+                        <li>您的影片和音訊檔案<strong>完全不會離開您的裝置</strong></li>
+                        <li>所有語音轉文字處理都在本機完成</li>
+                        <li>無需網路連線即可進行語音辨識</li>
+                        <li>處理完成後，原始檔案保持不變</li>
+                    </ul>
+
+                    <!-- Section 3 -->
+                    <h2>3. AI 翻譯功能</h2>
+                    <p>當您使用 AI 翻譯功能時，<strong>字幕文字</strong>會傳送至您所設定的 OpenAI 相容 API 服務進行翻譯。請注意：</p>
+                    <ul>
+                        <li>僅傳送<strong>文字字幕</strong>，不包含影片或音訊</li>
+                        <li>您可以自行選擇和設定 API 服務提供商</li>
+                        <li>API 金鑰儲存在您的本機裝置中</li>
+                        <li>翻譯請求直接傳送至您設定的 API 端點</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <p>
+                            <strong class="text-violet-400">重要提示：</strong>使用第三方 API 服務時，請參閱該服務提供商的隱私政策，了解其如何處理傳送的文字資料。
+                        </p>
+                    </div>
+
+                    <!-- Section 4 -->
+                    <h2>4. 資料儲存</h2>
+                    <p>Whispify 在您的本機裝置上儲存以下資料：</p>
+                    <ul>
+                        <li><strong>應用程式設定：</strong>您的偏好設定和 API 配置</li>
+                        <li><strong>Whisper 模型：</strong>下載的語音辨識模型檔案</li>
+                        <li><strong>輸出字幕：</strong>產生的 SRT 字幕檔案（儲存於您指定的位置）</li>
+                    </ul>
+                    <p>所有資料都儲存在您的 Mac 上，您可以隨時刪除這些資料。</p>
+
+                    <!-- Section 5 -->
+                    <h2>5. 第三方服務</h2>
+                    <p>Whispify 可能與以下第三方服務互動：</p>
+                    <ul>
+                        <li><strong>OpenAI 或相容 API：</strong>用於字幕翻譯（僅當您啟用翻譯功能時）</li>
+                        <li><strong>Hugging Face：</strong>用於下載 Whisper 模型檔案</li>
+                    </ul>
+                    <p>這些服務有各自的隱私政策，建議您在使用前閱讀了解。</p>
+
+                    <!-- Section 6 -->
+                    <h2>6. 資料安全</h2>
+                    <p>由於 Whispify 採用本機處理架構，您的資料安全主要取決於：</p>
+                    <ul>
+                        <li>您的 Mac 裝置安全性</li>
+                        <li>macOS 內建的安全保護機制</li>
+                        <li>您選擇的 API 服務提供商的安全措施</li>
+                    </ul>
+
+                    <!-- Section 7 -->
+                    <h2>7. 兒童隱私</h2>
+                    <p>Whispify 並非專門針對兒童設計，我們不會刻意收集任何使用者（包括兒童）的個人資料。</p>
+
+                    <!-- Section 8 -->
+                    <h2>8. 政策更新</h2>
+                    <p>我們可能會不定期更新本隱私政策。任何重大變更將透過應用程式更新或官方網站公告通知使用者。</p>
+
+                    <!-- Section 9 -->
+                    <h2>9. 聯絡我們</h2>
+                    <p>如果您對本隱私政策有任何疑問，歡迎透過以下方式聯絡我們：</p>
+                    <ul>
+                        <li>Threads：<a href="https://www.threads.com/@cashwugeek" class="text-cyan-400 hover:text-cyan-300 transition-colors">@cashwugeek</a></li>
+                        <li>X：<a href="https://x.com/cashwugeek" class="text-cyan-400 hover:text-cyan-300 transition-colors">@cashwugeek</a></li>
+                        <li>Facebook：<a href="https://www.facebook.com/cashwugeek/" class="text-cyan-400 hover:text-cyan-300 transition-colors">cashwugeek</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Back Link -->
+            <div class="text-center mt-10">
+                <a href="index.html" class="inline-flex items-center gap-2 text-gray-400 hover:text-violet-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    返回首頁
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 border-t border-dark-border relative z-10 mt-12">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-px bg-gradient-to-r from-transparent via-violet-600/50 to-transparent"></div>
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3 group">
+                    <img src="app-icon.png" alt="Whispify" class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
+                    <span class="font-display font-semibold text-lg gradient-text">Whispify</span>
+                </div>
+                <p class="text-gray-600 text-sm">
+                    © 2025 Whispify. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
