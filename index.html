@@ -998,26 +998,26 @@
                 <span class="gradient-text">支援平台</span>
             </h2>
             <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto scroll-animate">
-                目前支援 macOS，Windows 版本開發中
+                macOS 版本即將推出，Windows 版本開發中
             </p>
 
-            <div class="flex flex-col md:flex-row gap-6 max-w-4xl mx-auto items-stretch">
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 <!-- macOS - Primary Card -->
-                <div class="feature-card p-8 flex-1 md:flex-[1.3] scroll-animate-left relative overflow-hidden" style="transition-delay: 0.1s;">
-                    <!-- Glow Effect -->
-                    <div class="absolute -top-20 -right-20 w-40 h-40 bg-green-500/10 rounded-full blur-3xl"></div>
+                <div class="feature-card p-8 scroll-animate-left relative overflow-hidden" style="transition-delay: 0.1s;">
+                    <!-- Glow Effect - Amber for "coming soon" anticipation -->
+                    <div class="absolute -top-20 -right-20 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl"></div>
 
-                    <div class="flex flex-col md:flex-row md:items-center gap-6">
-                        <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-dark-elevated to-dark-surface flex items-center justify-center flex-shrink-0 border border-dark-border shadow-lg">
-                            <svg class="w-14 h-14 text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <div class="flex items-start gap-5">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-dark-elevated to-dark-surface flex items-center justify-center flex-shrink-0 border border-dark-border shadow-lg">
+                            <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                             </svg>
                         </div>
-                        <div class="flex-1">
-                            <div class="flex items-center gap-3 mb-2">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-3 mb-2 flex-wrap">
                                 <h3 class="text-2xl font-display font-semibold text-white">macOS</h3>
-                                <span class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-semibold border border-green-500/30">
-                                    已推出
+                                <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-semibold border border-amber-500/30">
+                                    即將推出
                                 </span>
                             </div>
                             <p class="text-gray-400 text-sm mb-4">
@@ -1031,27 +1031,30 @@
                 </div>
 
                 <!-- Windows - Secondary Card -->
-                <div class="feature-card p-8 flex-1 md:flex-[0.7] scroll-animate-right opacity-60" style="transition-delay: 0.2s;">
-                    <div class="text-center">
-                        <div class="w-20 h-20 rounded-2xl bg-dark-elevated flex items-center justify-center mx-auto mb-6 border border-dark-border">
+                <div class="feature-card p-8 scroll-animate-right relative overflow-hidden" style="transition-delay: 0.2s;">
+                    <!-- Subtle Glow Effect -->
+                    <div class="absolute -top-20 -right-20 w-40 h-40 bg-violet-500/5 rounded-full blur-3xl"></div>
+
+                    <div class="flex items-start gap-5">
+                        <div class="w-20 h-20 rounded-2xl bg-dark-elevated flex items-center justify-center flex-shrink-0 border border-dark-border shadow-lg">
                             <svg class="w-10 h-10 text-gray-500" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-display font-semibold mb-2 text-gray-400">Windows</h3>
-                        <span class="inline-block px-3 py-1 rounded-full border border-gray-700 text-gray-500 text-xs font-medium mb-3">
-                            開發中
-                        </span>
-                        <p class="text-gray-600 text-sm">
-                            敬請期待
-                        </p>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-3 mb-2 flex-wrap">
+                                <h3 class="text-2xl font-display font-semibold text-gray-300">Windows</h3>
+                                <span class="px-3 py-1 rounded-full bg-gray-500/10 text-gray-500 text-xs font-semibold border border-gray-500/20">
+                                    開發中
+                                </span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4">
+                                敬請期待
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <p class="text-center text-gray-500 mt-10 scroll-animate" style="transition-delay: 0.3s;">
-                想要 Windows 版？追蹤社群獲得最新開發進度
-            </p>
         </div>
     </section>
 
@@ -1085,7 +1088,7 @@
                             </svg>
                         </div>
                         <div class="flex-1">
-                            <span class="font-display font-semibold text-white block">追蹤 Threads</span>
+                            <span class="font-display font-semibold text-white block">Threads</span>
                             <span class="text-gray-500 text-sm">@cashwugeek</span>
                         </div>
                         <svg class="w-5 h-5 text-gray-500 group-hover:text-violet-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1102,10 +1105,27 @@
                             </svg>
                         </div>
                         <div class="flex-1">
-                            <span class="font-display font-semibold text-white block">追蹤 X</span>
+                            <span class="font-display font-semibold text-white block">X</span>
                             <span class="text-gray-500 text-sm">@cashwugeek</span>
                         </div>
                         <svg class="w-5 h-5 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+
+                    <!-- Facebook Button -->
+                    <a href="https://www.facebook.com/cashwugeek/" target="_blank" rel="noopener noreferrer"
+                       class="social-card rounded-2xl px-6 py-5 flex items-center gap-4 group">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600/20 to-violet-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <span class="font-display font-semibold text-white block">Facebook</span>
+                            <span class="text-gray-500 text-sm">cashwugeek</span>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                     </a>
