@@ -128,6 +128,37 @@
         .platform-dimmed {
             opacity: 0.6;
         }
+
+        /* App icon 浮動動畫 */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* 光暈脈衝動畫 */
+        @keyframes glow-pulse {
+            0%, 100% {
+                box-shadow:
+                    0 0 20px rgba(124, 58, 237, 0.5),
+                    0 0 40px rgba(124, 58, 237, 0.3),
+                    0 0 60px rgba(167, 139, 250, 0.2);
+            }
+            50% {
+                box-shadow:
+                    0 0 30px rgba(124, 58, 237, 0.7),
+                    0 0 60px rgba(124, 58, 237, 0.5),
+                    0 0 90px rgba(167, 139, 250, 0.3);
+            }
+        }
+
+        .app-icon-animated {
+            animation: float 3s ease-in-out infinite, glow-pulse 3s ease-in-out infinite;
+            border-radius: 22%;
+        }
     </style>
 </head>
 <body class="bg-dark-primary text-white min-h-screen">
@@ -135,18 +166,8 @@
     <section class="relative min-h-screen flex items-center justify-center radial-bg overflow-hidden">
         <div class="container mx-auto px-6 py-20 text-center">
             <!-- App Icon Animation -->
-            <div class="mb-8 opacity-0 animate-fade-in-up">
-                <div class="inline-flex items-center justify-center w-24 h-24 bg-white rounded-3xl glow-purple">
-                    <div class="flex items-end gap-1 h-12">
-                        <div class="wave-bar w-1.5 h-3 bg-violet-600 rounded-full"></div>
-                        <div class="wave-bar w-1.5 h-6 bg-violet-600 rounded-full"></div>
-                        <div class="wave-bar w-1.5 h-10 bg-violet-500 rounded-full"></div>
-                        <div class="wave-bar w-1.5 h-8 bg-violet-500 rounded-full"></div>
-                        <div class="wave-bar w-1.5 h-12 bg-violet-400 rounded-full"></div>
-                        <div class="wave-bar w-1.5 h-6 bg-violet-400 rounded-full"></div>
-                        <div class="wave-bar w-1.5 h-4 bg-violet-300 rounded-full"></div>
-                    </div>
-                </div>
+            <div class="mb-8 opacity-0 animate-fade-in-up flex justify-center">
+                <img src="app-icon.png" alt="Whispify" class="w-24 h-24 app-icon-animated">
             </div>
 
             <!-- Title -->
@@ -429,15 +450,7 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                        <div class="flex items-end gap-0.5 h-4">
-                            <div class="w-0.5 h-1 bg-violet-600 rounded-full"></div>
-                            <div class="w-0.5 h-2 bg-violet-600 rounded-full"></div>
-                            <div class="w-0.5 h-3 bg-violet-500 rounded-full"></div>
-                            <div class="w-0.5 h-2 bg-violet-500 rounded-full"></div>
-                            <div class="w-0.5 h-4 bg-violet-400 rounded-full"></div>
-                        </div>
-                    </div>
+                    <img src="app-icon.png" alt="Whispify" class="w-8 h-8 rounded-lg">
                     <span class="font-semibold gradient-text">Whispify</span>
                 </div>
 
