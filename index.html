@@ -5,22 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whispify - Mac 原生影片字幕轉錄與翻譯工具</title>
     <meta name="description" content="將任何影片轉換成精準字幕，支援 AI 翻譯 — 完全在你的 Mac 上本地處理，保護隱私。">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        display: ['Outfit', 'Noto Sans TC', 'sans-serif'],
+                        body: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                    },
                     colors: {
                         violet: {
+                            50: '#F5F3FF',
                             100: '#EDE9FE',
+                            200: '#DDD6FE',
+                            300: '#C4B5FD',
                             400: '#A78BFA',
+                            500: '#8B5CF6',
                             600: '#7C3AED',
                             700: '#6D28D9',
+                            800: '#5B21B6',
+                            900: '#4C1D95',
+                        },
+                        cyan: {
+                            400: '#22D3EE',
+                            500: '#06B6D4',
+                            600: '#0891B2',
+                        },
+                        amber: {
+                            400: '#FBBF24',
+                            500: '#F59E0B',
                         },
                         dark: {
-                            primary: '#0F0A1A',
-                            secondary: '#1A1025',
-                            card: '#1E1529',
+                            abyss: '#050208',
+                            primary: '#0A0612',
+                            secondary: '#110B1A',
+                            elevated: '#1A1025',
+                            surface: '#241832',
+                            border: '#2D1F3D',
                         }
                     }
                 }
@@ -32,27 +58,143 @@
             scroll-behavior: smooth;
         }
 
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        /* Noise Texture Overlay */
+        .noise-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Mesh Gradient Background */
+        .mesh-gradient {
+            background:
+                radial-gradient(ellipse 80% 60% at 10% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 80% at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 100% 50% at 50% 0%, rgba(167, 139, 250, 0.06) 0%, transparent 40%),
+                linear-gradient(180deg, #050208 0%, #0A0612 50%, #110B1A 100%);
+        }
+
+        /* Floating Gradient Orbs */
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .orb-purple {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%);
+            animation: float-orb 20s ease-in-out infinite;
+        }
+
+        .orb-cyan {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+            animation: float-orb 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float-orb {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.05);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+        }
+
+        /* Enhanced Gradient Text */
         .gradient-text {
-            background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+            background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 50%, #06B6D4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
+        .gradient-text-warm {
+            background: linear-gradient(135deg, #7C3AED 0%, #EC4899 50%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Enhanced Glow Effects */
         .glow-purple {
             box-shadow: 0 0 40px rgba(124, 58, 237, 0.3);
         }
 
+        .glow-cyan {
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.3);
+        }
+
         .card-glow {
-            box-shadow: 0 0 30px rgba(124, 58, 237, 0.15);
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.1);
         }
 
+        /* Enhanced Glass Card */
         .glass-card {
-            background: rgba(30, 21, 41, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(124, 58, 237, 0.2);
+            background: linear-gradient(135deg, rgba(26, 16, 37, 0.9) 0%, rgba(17, 11, 26, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(124, 58, 237, 0.15);
+            position: relative;
         }
 
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.4), transparent);
+            border-radius: inherit;
+        }
+
+        /* Feature Card V2 - Bento Style */
+        .feature-card {
+            background: linear-gradient(135deg, rgba(26, 16, 37, 0.9) 0%, rgba(17, 11, 26, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(124, 58, 237, 0.1);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.5), transparent);
+        }
+
+        .feature-card:hover {
+            border-color: rgba(124, 58, 237, 0.3);
+            transform: translateY(-6px);
+            box-shadow:
+                0 20px 40px -15px rgba(124, 58, 237, 0.25),
+                0 0 60px -20px rgba(6, 182, 212, 0.15);
+        }
+
+        /* Gradient Border Effect */
         .gradient-border {
             position: relative;
         }
@@ -63,31 +205,80 @@
             inset: 0;
             padding: 1px;
             border-radius: inherit;
-            background: linear-gradient(135deg, #7C3AED, #A78BFA);
+            background: linear-gradient(135deg, #7C3AED, #06B6D4);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
+        .gradient-border:hover::before {
+            opacity: 1;
+        }
+
+        /* Enhanced Button */
         .btn-gradient {
-            background: linear-gradient(135deg, #7C3AED 0%, #9333EA 100%);
+            background: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 50%, #06B6D4 100%);
+            background-size: 200% 100%;
+            background-position: 0% 0%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .btn-gradient:hover {
-            background: linear-gradient(135deg, #6D28D9 0%, #7C3AED 100%);
-            box-shadow: 0 0 30px rgba(124, 58, 237, 0.5);
+            background-position: 100% 0%;
+            box-shadow:
+                0 0 30px rgba(124, 58, 237, 0.5),
+                0 0 60px rgba(6, 182, 212, 0.3);
+            transform: translateY(-2px);
         }
 
+        /* Legacy radial-bg (keeping for compatibility) */
         .radial-bg {
-            background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 50%);
+            background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(124, 58, 237, 0.12) 0%, transparent 50%);
+        }
+
+        /* Sound Wave Animation */
+        .sound-wave {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+        }
+
+        .wave-line {
+            width: 3px;
+            background: linear-gradient(180deg, #7C3AED 0%, #06B6D4 100%);
+            border-radius: 3px;
+            animation: wave-dance 1s ease-in-out infinite;
+        }
+
+        .wave-line:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .wave-line:nth-child(2) { height: 30px; animation-delay: 0.1s; }
+        .wave-line:nth-child(3) { height: 25px; animation-delay: 0.2s; }
+        .wave-line:nth-child(4) { height: 35px; animation-delay: 0.3s; }
+        .wave-line:nth-child(5) { height: 20px; animation-delay: 0.4s; }
+        .wave-line:nth-child(6) { height: 28px; animation-delay: 0.5s; }
+        .wave-line:nth-child(7) { height: 22px; animation-delay: 0.6s; }
+
+        @keyframes wave-dance {
+            0%, 100% {
+                transform: scaleY(0.5);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scaleY(1);
+                opacity: 1;
+            }
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -95,17 +286,53 @@
             }
         }
 
-        @keyframes pulse-wave {
-            0%, 100% {
-                transform: scaleY(0.5);
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
             }
-            50% {
-                transform: scaleY(1);
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
 
         .animate-fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
+            animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .animate-fade-in-scale {
+            animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .animate-slide-in-left {
+            animation: slideInLeft 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         .animate-delay-100 { animation-delay: 0.1s; }
@@ -113,17 +340,217 @@
         .animate-delay-300 { animation-delay: 0.3s; }
         .animate-delay-400 { animation-delay: 0.4s; }
         .animate-delay-500 { animation-delay: 0.5s; }
+        .animate-delay-600 { animation-delay: 0.6s; }
+        .animate-delay-700 { animation-delay: 0.7s; }
+        .animate-delay-800 { animation-delay: 0.8s; }
 
-        .wave-bar {
-            animation: pulse-wave 1.2s ease-in-out infinite;
+        /* Scroll Animation Classes */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
-        .wave-bar:nth-child(3) { animation-delay: 0.2s; }
-        .wave-bar:nth-child(4) { animation-delay: 0.3s; }
-        .wave-bar:nth-child(5) { animation-delay: 0.4s; }
-        .wave-bar:nth-child(6) { animation-delay: 0.5s; }
-        .wave-bar:nth-child(7) { animation-delay: 0.6s; }
+        .scroll-animate.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-animate-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-animate-left.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scroll-animate-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-animate-right.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scroll-animate-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-animate-scale.animate-in {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Timeline Connector */
+        .timeline-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 1.5s ease-out;
+        }
+
+        .timeline-line.animate-in {
+            stroke-dashoffset: 0;
+        }
+
+        /* Step Number Background */
+        .step-number-bg {
+            position: absolute;
+            font-size: 8rem;
+            font-weight: 800;
+            color: rgba(124, 58, 237, 0.05);
+            top: -20px;
+            left: -10px;
+            font-family: 'Outfit', sans-serif;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        /* Step Icon Animations */
+        .step-icon {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Floating animation for step icons */
+        @keyframes step-float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-8px) rotate(1deg);
+            }
+        }
+
+        .step-icon-float {
+            animation: step-float 4s ease-in-out infinite;
+        }
+
+        .step-icon-float-delay-1 { animation-delay: 0s; }
+        .step-icon-float-delay-2 { animation-delay: 0.5s; }
+        .step-icon-float-delay-3 { animation-delay: 1s; }
+        .step-icon-float-delay-4 { animation-delay: 1.5s; }
+
+        /* Pulse ring effect */
+        .step-icon::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: inherit;
+            background: inherit;
+            opacity: 0;
+            z-index: -1;
+            animation: pulse-ring 3s ease-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* 3D tilt on hover */
+        .step-icon:hover {
+            transform: perspective(500px) rotateX(-5deg) rotateY(5deg) translateY(-5px) scale(1.05);
+            box-shadow:
+                0 25px 50px -12px rgba(124, 58, 237, 0.4),
+                0 0 30px rgba(6, 182, 212, 0.3);
+        }
+
+        .step-icon:hover svg {
+            transform: scale(1.1);
+        }
+
+        .step-icon svg {
+            transition: transform 0.3s ease;
+        }
+
+        /* Glow intensify on hover */
+        .step-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .step-icon:hover::after {
+            opacity: 1;
+        }
+
+        /* Connection line dots animation */
+        @keyframes dot-travel {
+            0% {
+                left: 0%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #7C3AED, #06B6D4);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: dot-travel 4s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.8);
+        }
+
+        .timeline-dot:nth-child(2) { animation-delay: 1.33s; }
+        .timeline-dot:nth-child(3) { animation-delay: 2.66s; }
+
+        /* Step entrance animation */
+        @keyframes step-bounce-in {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+            60% {
+                transform: translateY(-10px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .step-item {
+            opacity: 0;
+        }
+
+        .step-item.animate-in {
+            animation: step-bounce-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
 
         .platform-dimmed {
             opacity: 0.6;
@@ -155,61 +582,198 @@
             }
         }
 
+        /* Subtle Bounce for Arrow */
+        @keyframes bounce-subtle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
+        }
+        .animate-bounce-subtle {
+            animation: bounce-subtle 2s ease-in-out infinite;
+        }
+
+        /* Enhanced App Icon with 3D Effect */
+        .app-icon-3d {
+            animation: float 4s ease-in-out infinite, glow-pulse 4s ease-in-out infinite;
+            border-radius: 22%;
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            box-shadow:
+                0 25px 50px -12px rgba(124, 58, 237, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: transform 0.5s ease;
+        }
+
+        .app-icon-3d:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05);
+        }
+
         .app-icon-animated {
             animation: float 3s ease-in-out infinite, glow-pulse 3s ease-in-out infinite;
             border-radius: 22%;
         }
+
+        /* Social Card Gradient Border */
+        .social-card {
+            background: rgba(26, 16, 37, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .social-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, #7C3AED, #06B6D4);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-card:hover {
+            transform: translateY(-4px);
+            border-color: transparent;
+        }
+
+        .social-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Icon Container Enhancement */
+        .icon-container {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .icon-container {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.3) 0%, rgba(6, 182, 212, 0.2) 100%);
+            border-color: rgba(124, 58, 237, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus States for Accessibility */
+        .btn-gradient:focus-visible,
+        .social-card:focus-visible {
+            outline: 2px solid #A78BFA;
+            outline-offset: 2px;
+        }
     </style>
 </head>
-<body class="bg-dark-primary text-white min-h-screen">
+<body class="mesh-gradient text-white min-h-screen font-body">
+    <!-- Noise Texture Overlay -->
+    <div class="noise-texture"></div>
+
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center radial-bg overflow-hidden">
-        <div class="container mx-auto px-6 py-20 text-center">
-            <!-- App Icon Animation -->
-            <div class="mb-8 opacity-0 animate-fade-in-up flex justify-center">
-                <img src="app-icon.png" alt="Whispify" class="w-24 h-24 app-icon-animated">
+    <section class="relative min-h-screen flex items-center overflow-hidden">
+        <!-- Floating Gradient Orbs -->
+        <div class="gradient-orb orb-purple absolute -top-48 -left-48 opacity-0 animate-fade-in-up"></div>
+        <div class="gradient-orb orb-cyan absolute top-1/3 -right-32 opacity-0 animate-fade-in-up animate-delay-200"></div>
+
+        <div class="container mx-auto px-6 py-20">
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-16 items-center max-w-6xl mx-auto">
+                <!-- Left Side - Text Content -->
+                <div class="text-center order-2 md:order-1">
+                    <!-- Title -->
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 opacity-0 animate-fade-in-up animate-delay-100">
+                        <span class="gradient-text">Whispify</span>
+                    </h1>
+
+                    <!-- Tagline -->
+                    <p class="text-xl md:text-2xl text-gray-200 mb-3 opacity-0 animate-fade-in-up animate-delay-200 font-medium">
+                        影片字幕轉錄與翻譯工具
+                    </p>
+                    <p class="text-lg text-gray-400 mb-8 opacity-0 animate-fade-in-up animate-delay-300">
+                        完全本地處理，保護你的隱私
+                    </p>
+
+                    <!-- Badges -->
+                    <div class="flex flex-wrap justify-center gap-3 mb-10 opacity-0 animate-fade-in-up animate-delay-400">
+                        <span class="px-4 py-2 rounded-full glass-card text-sm text-violet-300 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                            隱私優先
+                        </span>
+                        <span class="px-4 py-2 rounded-full glass-card text-sm text-cyan-400 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                            </svg>
+                            本地處理
+                        </span>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="flex justify-center opacity-0 animate-fade-in-up animate-delay-500">
+                        <a href="#features" class="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg group inline-flex items-center">
+                            了解更多
+                            <span class="inline-flex items-center ml-2 group-hover:translate-y-0.5 transition-transform duration-300">
+                                <svg class="w-5 h-5 animate-bounce-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Side - App Icon with Sound Wave -->
+                <div class="flex flex-col items-center justify-center order-1 md:order-2">
+                    <div class="relative opacity-0 animate-fade-in-scale animate-delay-100">
+                        <!-- Glow ring behind icon -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full bg-violet-600/20 blur-3xl animate-pulse"></div>
+                        </div>
+
+                        <!-- Sound Wave Background -->
+                        <div class="absolute inset-0 flex items-center justify-center -z-10 scale-[2]">
+                            <div class="sound-wave opacity-20">
+                                <div class="wave-line"></div>
+                                <div class="wave-line"></div>
+                                <div class="wave-line"></div>
+                                <div class="wave-line"></div>
+                                <div class="wave-line"></div>
+                                <div class="wave-line"></div>
+                                <div class="wave-line"></div>
+                            </div>
+                        </div>
+
+                        <!-- App Icon - Larger -->
+                        <img src="app-icon.png" alt="Whispify" class="w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 app-icon-3d relative z-10">
+                    </div>
+
+                    <!-- Sound Wave Indicator Below Icon -->
+                    <div class="mt-10 sound-wave opacity-0 animate-fade-in-up animate-delay-400">
+                        <div class="wave-line"></div>
+                        <div class="wave-line"></div>
+                        <div class="wave-line"></div>
+                        <div class="wave-line"></div>
+                        <div class="wave-line"></div>
+                        <div class="wave-line"></div>
+                        <div class="wave-line"></div>
+                    </div>
+                </div>
             </div>
-
-            <!-- Title -->
-            <h1 class="text-5xl md:text-7xl font-bold mb-4 opacity-0 animate-fade-in-up animate-delay-100">
-                <span class="gradient-text">Whispify</span>
-            </h1>
-
-            <!-- Tagline -->
-            <p class="text-xl md:text-2xl text-gray-300 mb-2 opacity-0 animate-fade-in-up animate-delay-200">
-                影片字幕轉錄與翻譯工具
-            </p>
-            <p class="text-lg text-gray-400 mb-8 opacity-0 animate-fade-in-up animate-delay-300">
-                完全本地處理，保護你的隱私
-            </p>
-
-            <!-- Badges -->
-            <div class="flex justify-center gap-4 mb-10 opacity-0 animate-fade-in-up animate-delay-400">
-                <span class="px-4 py-2 rounded-full glass-card text-sm text-violet-400">
-                    <svg class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                    </svg>
-                    隱私優先
-                </span>
-                <span class="px-4 py-2 rounded-full glass-card text-sm text-violet-400">
-                    <svg class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-                    </svg>
-                    本地處理
-                </span>
-            </div>
-
-            <!-- CTA Button -->
-            <a href="#features" class="inline-block btn-gradient px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 opacity-0 animate-fade-in-up animate-delay-500">
-                了解更多
-                <svg class="inline-block w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </a>
         </div>
 
         <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-0 animate-fade-in-up animate-delay-700">
             <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10l5 5 5-5"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 6l5 5 5-5"></path>
@@ -218,89 +782,111 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-24 radial-bg">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+    <section id="features" class="py-24 relative overflow-hidden">
+        <!-- Background Orb -->
+        <div class="gradient-orb orb-cyan absolute -bottom-64 -left-64 opacity-50"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-4 scroll-animate">
                 <span class="gradient-text">強大功能</span>
             </h2>
-            <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+            <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto scroll-animate">
                 專為影片創作者和語言學習者設計的完整字幕解決方案
             </p>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Feature 1 -->
-                <div class="glass-card rounded-2xl p-6 card-glow transition-transform duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-violet-600/20 flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+                <!-- Feature 1 - Large Card (spans 2 cols on lg) -->
+                <div class="feature-card p-8 lg:col-span-2 lg:row-span-2 scroll-animate" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 rounded-2xl icon-container flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">本地語音辨識</h3>
-                    <p class="text-gray-400 text-sm">
-                        使用 WhisperKit (Apple CoreML) 在本機進行語音轉文字，不需上傳影片到雲端
+                    <h3 class="text-2xl font-display font-semibold mb-3 text-white">本地語音辨識</h3>
+                    <p class="text-gray-400 text-base leading-relaxed mb-6">
+                        使用 WhisperKit (Apple CoreML) 在本機進行語音轉文字，不需上傳影片到雲端。完全離線處理，保護你的隱私。
                     </p>
+                    <!-- Visual Element -->
+                    <div class="flex items-center gap-3 text-sm">
+                        <span class="px-3 py-1 rounded-full bg-violet-600/20 text-violet-400">WhisperKit</span>
+                        <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400">CoreML</span>
+                        <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-400">離線</span>
+                    </div>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="glass-card rounded-2xl p-6 card-glow transition-transform duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-violet-600/20 flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="feature-card p-6 scroll-animate" style="transition-delay: 0.2s;">
+                    <div class="w-12 h-12 rounded-xl icon-container flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">多語言支援</h3>
+                    <h3 class="text-lg font-display font-semibold mb-2 text-white">多語言支援</h3>
                     <p class="text-gray-400 text-sm">
                         支援英文、日文、中文等多種語言的語音辨識
                     </p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="glass-card rounded-2xl p-6 card-glow transition-transform duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-violet-600/20 flex items-center justify-center mb-4">
+                <div class="feature-card p-6 scroll-animate" style="transition-delay: 0.3s;">
+                    <div class="w-12 h-12 rounded-xl icon-container flex items-center justify-center mb-4">
                         <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">AI 智慧翻譯</h3>
+                    <h3 class="text-lg font-display font-semibold mb-2 text-white">AI 智慧翻譯</h3>
                     <p class="text-gray-400 text-sm">
                         整合 OpenAI 相容 API，一鍵將字幕翻譯成繁體中文
                     </p>
                 </div>
 
-                <!-- Feature 4 -->
-                <div class="glass-card rounded-2xl p-6 card-glow transition-transform duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-violet-600/20 flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-                        </svg>
+                <!-- Feature 4 - Wide Card (spans 2 cols on lg) -->
+                <div class="feature-card p-6 lg:col-span-2 scroll-animate" style="transition-delay: 0.4s;">
+                    <div class="flex flex-col md:flex-row md:items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl icon-container flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-display font-semibold mb-2 text-white">彈性模型選擇</h3>
+                            <p class="text-gray-400 text-sm">
+                                從輕量 Tiny 到高精度 Large，依需求選擇最適合的 Whisper 模型
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">彈性模型選擇</h3>
-                    <p class="text-gray-400 text-sm">
-                        從輕量 Tiny 到高精度 Large，依需求選擇 Whisper 模型
-                    </p>
+                    <!-- Model Selector Visual -->
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-surface text-gray-500 text-xs border border-dark-border">Tiny</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-surface text-gray-500 text-xs border border-dark-border">Base</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-surface text-gray-400 text-xs border border-dark-border">Small</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-violet-600/20 text-violet-400 text-xs border border-violet-500/30">Medium</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-dark-surface text-gray-400 text-xs border border-dark-border">Large</span>
+                    </div>
                 </div>
 
                 <!-- Feature 5 -->
-                <div class="glass-card rounded-2xl p-6 card-glow transition-transform duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-violet-600/20 flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="feature-card p-6 scroll-animate" style="transition-delay: 0.5s;">
+                    <div class="w-12 h-12 rounded-xl icon-container flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">SRT 匯出</h3>
+                    <h3 class="text-lg font-display font-semibold mb-2 text-white">SRT 匯出</h3>
                     <p class="text-gray-400 text-sm">
                         支援原文、翻譯、雙語三種字幕格式匯出
                     </p>
                 </div>
 
                 <!-- Feature 6 -->
-                <div class="glass-card rounded-2xl p-6 card-glow transition-transform duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-violet-600/20 flex items-center justify-center mb-4">
+                <div class="feature-card p-6 scroll-animate" style="transition-delay: 0.6s;">
+                    <div class="w-12 h-12 rounded-xl icon-container flex items-center justify-center mb-4">
                         <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">自動佇列處理</h3>
+                    <h3 class="text-lg font-display font-semibold mb-2 text-white">自動佇列處理</h3>
                     <p class="text-gray-400 text-sm">
                         批次匯入影片，自動排隊轉錄
                     </p>
@@ -310,164 +896,237 @@
     </section>
 
     <!-- How it Works Section -->
-    <section class="py-24 bg-dark-secondary">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+    <section class="py-24 bg-dark-secondary relative overflow-hidden">
+        <!-- Background Orb -->
+        <div class="gradient-orb orb-purple absolute -top-32 -right-64 opacity-30"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-4 scroll-animate">
                 <span class="gradient-text">使用方式</span>
             </h2>
-            <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+            <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto scroll-animate">
                 只需四個簡單步驟，即可完成影片字幕轉錄
             </p>
 
-            <div class="grid md:grid-cols-4 gap-6 relative">
-                <!-- Connection line (desktop only) -->
-                <div class="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-violet-600 via-violet-400 to-violet-600"></div>
+            <!-- Timeline Grid -->
+            <div class="grid md:grid-cols-4 gap-8 relative max-w-5xl mx-auto">
+                <!-- SVG Connection Line with animated dots (desktop only) -->
+                <div class="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-4 z-0">
+                    <svg class="w-full h-full" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#7C3AED;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#06B6D4;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <line x1="0%" y1="50%" x2="100%" y2="50%" stroke="url(#lineGradient)" stroke-width="2" class="timeline-line" />
+                    </svg>
+                    <!-- Animated traveling dots -->
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-dot"></div>
+                </div>
 
                 <!-- Step 1 - 匯入 -->
-                <div class="text-center relative">
-                    <div class="w-16 h-16 rounded-full bg-violet-600 flex items-center justify-center mx-auto mb-6 relative z-10">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
-                        </svg>
+                <div class="relative step-item" style="--delay: 0.1s;">
+                    <span class="step-number-bg">1</span>
+                    <div class="relative z-10 text-center md:text-left">
+                        <div class="step-icon step-icon-float step-icon-float-delay-1 w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-600 to-violet-700 flex items-center justify-center mx-auto md:mx-0 mb-6 shadow-lg shadow-violet-600/30 cursor-pointer">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-cyan-400 font-semibold text-sm tracking-wider uppercase mb-2 block">Step 01</span>
+                        <h3 class="text-xl font-display font-semibold mb-2 text-white">匯入影片</h3>
+                        <p class="text-gray-400 text-sm">拖放或選擇影片檔案</p>
                     </div>
-                    <div class="text-violet-400 font-semibold mb-2">步驟 1</div>
-                    <h3 class="text-xl font-semibold mb-2">匯入影片</h3>
-                    <p class="text-gray-400 text-sm">拖放或選擇影片檔案</p>
                 </div>
 
                 <!-- Step 2 - 轉錄 -->
-                <div class="text-center relative">
-                    <div class="w-16 h-16 rounded-full bg-violet-600 flex items-center justify-center mx-auto mb-6 relative z-10">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-                        </svg>
+                <div class="relative step-item md:mt-8" style="--delay: 0.25s;">
+                    <span class="step-number-bg">2</span>
+                    <div class="relative z-10 text-center md:text-left">
+                        <div class="step-icon step-icon-float step-icon-float-delay-2 w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-500 to-cyan-600 flex items-center justify-center mx-auto md:mx-0 mb-6 shadow-lg shadow-cyan-600/30 cursor-pointer">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                            </svg>
+                        </div>
+                        <span class="text-cyan-400 font-semibold text-sm tracking-wider uppercase mb-2 block">Step 02</span>
+                        <h3 class="text-xl font-display font-semibold mb-2 text-white">語音轉錄</h3>
+                        <p class="text-gray-400 text-sm">選擇 Whisper 模型，開始辨識</p>
                     </div>
-                    <div class="text-violet-400 font-semibold mb-2">步驟 2</div>
-                    <h3 class="text-xl font-semibold mb-2">語音轉錄</h3>
-                    <p class="text-gray-400 text-sm">選擇 Whisper 模型，開始辨識</p>
                 </div>
 
                 <!-- Step 3 - 翻譯 -->
-                <div class="text-center relative">
-                    <div class="w-16 h-16 rounded-full bg-violet-600 flex items-center justify-center mx-auto mb-6 relative z-10">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
-                        </svg>
+                <div class="relative step-item" style="--delay: 0.4s;">
+                    <span class="step-number-bg">3</span>
+                    <div class="relative z-10 text-center md:text-left">
+                        <div class="step-icon step-icon-float step-icon-float-delay-3 w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center mx-auto md:mx-0 mb-6 shadow-lg shadow-violet-600/30 cursor-pointer">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                            </svg>
+                        </div>
+                        <span class="text-cyan-400 font-semibold text-sm tracking-wider uppercase mb-2 block">Step 03</span>
+                        <h3 class="text-xl font-display font-semibold mb-2 text-white">AI 翻譯</h3>
+                        <p class="text-gray-400 text-sm">一鍵翻譯成繁體中文</p>
                     </div>
-                    <div class="text-violet-400 font-semibold mb-2">步驟 3</div>
-                    <h3 class="text-xl font-semibold mb-2">AI 翻譯</h3>
-                    <p class="text-gray-400 text-sm">一鍵翻譯成繁體中文</p>
                 </div>
 
                 <!-- Step 4 - 匯出 -->
-                <div class="text-center relative">
-                    <div class="w-16 h-16 rounded-full bg-violet-600 flex items-center justify-center mx-auto mb-6 relative z-10">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
+                <div class="relative step-item md:mt-8" style="--delay: 0.55s;">
+                    <span class="step-number-bg">4</span>
+                    <div class="relative z-10 text-center md:text-left">
+                        <div class="step-icon step-icon-float step-icon-float-delay-4 w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-600 to-violet-700 flex items-center justify-center mx-auto md:mx-0 mb-6 shadow-lg shadow-violet-600/30 cursor-pointer">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-cyan-400 font-semibold text-sm tracking-wider uppercase mb-2 block">Step 04</span>
+                        <h3 class="text-xl font-display font-semibold mb-2 text-white">匯出字幕</h3>
+                        <p class="text-gray-400 text-sm">匯出 SRT 字幕檔</p>
                     </div>
-                    <div class="text-violet-400 font-semibold mb-2">步驟 4</div>
-                    <h3 class="text-xl font-semibold mb-2">匯出字幕</h3>
-                    <p class="text-gray-400 text-sm">匯出 SRT 字幕檔</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Platform Section -->
-    <section class="py-24 radial-bg">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+    <section class="py-24 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-4 scroll-animate">
                 <span class="gradient-text">支援平台</span>
             </h2>
-            <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+            <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto scroll-animate">
                 目前支援 macOS，Windows 版本開發中
             </p>
 
-            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                <!-- macOS -->
-                <div class="glass-card rounded-2xl p-8 card-glow text-center">
-                    <div class="w-20 h-20 rounded-2xl bg-dark-primary flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                        </svg>
+            <div class="flex flex-col md:flex-row gap-6 max-w-4xl mx-auto items-stretch">
+                <!-- macOS - Primary Card -->
+                <div class="feature-card p-8 flex-1 md:flex-[1.3] scroll-animate-left relative overflow-hidden" style="transition-delay: 0.1s;">
+                    <!-- Glow Effect -->
+                    <div class="absolute -top-20 -right-20 w-40 h-40 bg-green-500/10 rounded-full blur-3xl"></div>
+
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-dark-elevated to-dark-surface flex items-center justify-center flex-shrink-0 border border-dark-border shadow-lg">
+                            <svg class="w-14 h-14 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <h3 class="text-2xl font-display font-semibold text-white">macOS</h3>
+                                <span class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-semibold border border-green-500/30">
+                                    已推出
+                                </span>
+                            </div>
+                            <p class="text-gray-400 text-sm mb-4">
+                                系統需求：macOS 14.0 (Sonoma) 或以上
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 rounded bg-dark-surface text-gray-500 text-xs">Apple Silicon</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-2">macOS</h3>
-                    <span class="inline-block px-4 py-1 rounded-full bg-green-500/20 text-green-400 text-sm font-medium mb-4">
-                        ✓ 已推出
-                    </span>
-                    <p class="text-gray-400 text-sm">
-                        系統需求：macOS 14.0 (Sonoma) 或以上
-                    </p>
                 </div>
 
-                <!-- Windows -->
-                <div class="glass-card rounded-2xl p-8 text-center platform-dimmed">
-                    <div class="w-20 h-20 rounded-2xl bg-dark-primary flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-10 h-10 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
-                        </svg>
+                <!-- Windows - Secondary Card -->
+                <div class="feature-card p-8 flex-1 md:flex-[0.7] scroll-animate-right opacity-60" style="transition-delay: 0.2s;">
+                    <div class="text-center">
+                        <div class="w-20 h-20 rounded-2xl bg-dark-elevated flex items-center justify-center mx-auto mb-6 border border-dark-border">
+                            <svg class="w-10 h-10 text-gray-500" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-display font-semibold mb-2 text-gray-400">Windows</h3>
+                        <span class="inline-block px-3 py-1 rounded-full border border-gray-700 text-gray-500 text-xs font-medium mb-3">
+                            開發中
+                        </span>
+                        <p class="text-gray-600 text-sm">
+                            敬請期待
+                        </p>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-2 text-gray-400">Windows</h3>
-                    <span class="inline-block px-4 py-1 rounded-full border border-gray-600 text-gray-400 text-sm font-medium mb-4">
-                        開發中
-                    </span>
-                    <p class="text-gray-500 text-sm">
-                        敬請期待
-                    </p>
                 </div>
             </div>
 
-            <p class="text-center text-gray-400 mt-10">
-                想要 Windows 版？追蹤社群獲得最新開發進度！
+            <p class="text-center text-gray-500 mt-10 scroll-animate" style="transition-delay: 0.3s;">
+                想要 Windows 版？追蹤社群獲得最新開發進度
             </p>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-24 bg-dark-secondary">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                <span class="gradient-text">對這個工具有興趣？</span>
-            </h2>
-            <p class="text-gray-400 mb-10 max-w-xl mx-auto">
-                追蹤我的社群帳號，第一時間獲得發布通知
-            </p>
+    <section class="py-24 bg-dark-secondary relative overflow-hidden">
+        <!-- Background Orbs -->
+        <div class="gradient-orb orb-purple absolute top-1/2 -left-64 -translate-y-1/2 opacity-40"></div>
+        <div class="gradient-orb orb-cyan absolute top-1/2 -right-64 -translate-y-1/2 opacity-30"></div>
 
-            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
-                <!-- Threads Button -->
-                <a href="https://www.threads.com/@cashwugeek" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl glass-card border border-violet-600/50 hover:border-violet-400 transition-all duration-300 hover:-translate-y-1">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.96-.065-1.182.408-2.256 1.332-3.023.874-.726 2.132-1.142 3.54-1.17 1.04-.02 1.99.12 2.919.332-.03-.565-.16-1.07-.378-1.467-.39-.708-1.074-1.074-2.036-1.09-.818.007-1.54.245-2.076.69-.556.46-.849 1.004-.918 1.362l-2.014-.398c.158-.82.64-1.708 1.46-2.388.89-.74 2.067-1.15 3.505-1.179 1.593.028 2.843.594 3.715 1.681.755.945 1.105 2.177 1.04 3.665l.013.14c1.16.577 2.065 1.395 2.633 2.397.746 1.316.96 2.86.601 4.34-.428 1.758-1.51 3.266-3.136 4.366-1.532 1.037-3.489 1.596-5.66 1.615zm.87-6.682c1.04-.057 1.828-.4 2.343-1.02.478-.576.818-1.456.939-2.57-.73-.184-1.484-.284-2.253-.268-.984.02-1.798.266-2.353.712-.507.408-.764.933-.723 1.478.037.5.327.944.817 1.252.52.327 1.182.463 1.863.424l-.632-.008z"/>
-                    </svg>
-                    <span class="font-medium">追蹤 Threads</span>
-                </a>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+                <!-- Left - Text -->
+                <div class="text-center md:text-left scroll-animate-left">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
+                        <span class="gradient-text-warm">對這個工具有興趣？</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg">
+                        追蹤我的社群帳號，第一時間獲得發布通知
+                    </p>
+                    <p class="text-cyan-400 font-semibold mt-4 text-lg">@cashwugeek</p>
+                </div>
 
-                <!-- X (Twitter) Button -->
-                <a href="https://x.com/cashwugeek" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl glass-card border border-violet-600/50 hover:border-violet-400 transition-all duration-300 hover:-translate-y-1">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                    <span class="font-medium">追蹤 X</span>
-                </a>
+                <!-- Right - Social Cards -->
+                <div class="flex flex-col gap-4 scroll-animate-right">
+                    <!-- Threads Button -->
+                    <a href="https://www.threads.com/@cashwugeek" target="_blank" rel="noopener noreferrer"
+                       class="social-card rounded-2xl px-6 py-5 flex items-center gap-4 group">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600/20 to-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.96-.065-1.182.408-2.256 1.332-3.023.874-.726 2.132-1.142 3.54-1.17 1.04-.02 1.99.12 2.919.332-.03-.565-.16-1.07-.378-1.467-.39-.708-1.074-1.074-2.036-1.09-.818.007-1.54.245-2.076.69-.556.46-.849 1.004-.918 1.362l-2.014-.398c.158-.82.64-1.708 1.46-2.388.89-.74 2.067-1.15 3.505-1.179 1.593.028 2.843.594 3.715 1.681.755.945 1.105 2.177 1.04 3.665l.013.14c1.16.577 2.065 1.395 2.633 2.397.746 1.316.96 2.86.601 4.34-.428 1.758-1.51 3.266-3.136 4.366-1.532 1.037-3.489 1.596-5.66 1.615zm.87-6.682c1.04-.057 1.828-.4 2.343-1.02.478-.576.818-1.456.939-2.57-.73-.184-1.484-.284-2.253-.268-.984.02-1.798.266-2.353.712-.507.408-.764.933-.723 1.478.037.5.327.944.817 1.252.52.327 1.182.463 1.863.424l-.632-.008z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <span class="font-display font-semibold text-white block">追蹤 Threads</span>
+                            <span class="text-gray-500 text-sm">@cashwugeek</span>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-500 group-hover:text-violet-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+
+                    <!-- X (Twitter) Button -->
+                    <a href="https://x.com/cashwugeek" target="_blank" rel="noopener noreferrer"
+                       class="social-card rounded-2xl px-6 py-5 flex items-center gap-4 group">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600/20 to-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <span class="font-display font-semibold text-white block">追蹤 X</span>
+                            <span class="text-gray-500 text-sm">@cashwugeek</span>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
-
-            <p class="text-violet-400 font-medium">@cashwugeek</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 border-t border-gray-800">
+    <footer class="py-10 border-t border-dark-border relative">
+        <!-- Gradient line at top -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-px bg-gradient-to-r from-transparent via-violet-600/50 to-transparent"></div>
+
         <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="flex items-center gap-2">
-                    <img src="app-icon.png" alt="Whispify" class="w-8 h-8 rounded-lg">
-                    <span class="font-semibold gradient-text">Whispify</span>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3 group">
+                    <img src="app-icon.png" alt="Whispify" class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
+                    <span class="font-display font-semibold text-lg gradient-text">Whispify</span>
                 </div>
 
-                <p class="text-gray-500 text-sm">
+                <p class="text-gray-600 text-sm">
                     © 2025 Whispify. All rights reserved.
                 </p>
 
@@ -477,5 +1136,73 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll-animated elements
+        document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale').forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+        // Step items with staggered animation
+        const stepObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.style.getPropertyValue('--delay') || '0s';
+                    entry.target.style.animationDelay = delay;
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -5% 0px' });
+
+        document.querySelectorAll('.step-item').forEach(el => {
+            stepObserver.observe(el);
+        });
+
+        // Timeline line animation
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.timeline-line').forEach(el => {
+            timelineObserver.observe(el);
+        });
+
+        // Parallax effect for orbs (performance optimized)
+        let ticking = false;
+        const orbs = document.querySelectorAll('.gradient-orb');
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+                    orbs.forEach((orb, index) => {
+                        const speed = index % 2 === 0 ? 0.05 : 0.03;
+                        orb.style.transform = `translateY(${scrollY * speed}px)`;
+                    });
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    </script>
 </body>
 </html>
