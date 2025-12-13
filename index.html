@@ -316,14 +316,14 @@
                 <span class="gradient-text">使用方式</span>
             </h2>
             <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
-                只需三個簡單步驟，即可完成影片字幕轉錄
+                只需四個簡單步驟，即可完成影片字幕轉錄
             </p>
 
-            <div class="grid md:grid-cols-3 gap-8 relative">
+            <div class="grid md:grid-cols-4 gap-6 relative">
                 <!-- Connection line (desktop only) -->
-                <div class="hidden md:block absolute top-8 left-[16.67%] right-[16.67%] h-0.5 bg-gradient-to-r from-violet-600 via-violet-400 to-violet-600"></div>
+                <div class="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-violet-600 via-violet-400 to-violet-600"></div>
 
-                <!-- Step 1 -->
+                <!-- Step 1 - 匯入 -->
                 <div class="text-center relative">
                     <div class="w-16 h-16 rounded-full bg-violet-600 flex items-center justify-center mx-auto mb-6 relative z-10">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -335,7 +335,7 @@
                     <p class="text-gray-400 text-sm">拖放或選擇影片檔案</p>
                 </div>
 
-                <!-- Step 2 -->
+                <!-- Step 2 - 轉錄 -->
                 <div class="text-center relative">
                     <div class="w-16 h-16 rounded-full bg-violet-600 flex items-center justify-center mx-auto mb-6 relative z-10">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -343,20 +343,32 @@
                         </svg>
                     </div>
                     <div class="text-violet-400 font-semibold mb-2">步驟 2</div>
-                    <h3 class="text-xl font-semibold mb-2">選擇模型轉錄</h3>
-                    <p class="text-gray-400 text-sm">選擇 Whisper 模型，開始語音辨識</p>
+                    <h3 class="text-xl font-semibold mb-2">語音轉錄</h3>
+                    <p class="text-gray-400 text-sm">選擇 Whisper 模型，開始辨識</p>
                 </div>
 
-                <!-- Step 3 -->
+                <!-- Step 3 - 翻譯 -->
                 <div class="text-center relative">
                     <div class="w-16 h-16 rounded-full bg-violet-600 flex items-center justify-center mx-auto mb-6 relative z-10">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
                         </svg>
                     </div>
                     <div class="text-violet-400 font-semibold mb-2">步驟 3</div>
-                    <h3 class="text-xl font-semibold mb-2">翻譯匯出</h3>
-                    <p class="text-gray-400 text-sm">一鍵翻譯並匯出 SRT 字幕檔</p>
+                    <h3 class="text-xl font-semibold mb-2">AI 翻譯</h3>
+                    <p class="text-gray-400 text-sm">一鍵翻譯成繁體中文</p>
+                </div>
+
+                <!-- Step 4 - 匯出 -->
+                <div class="text-center relative">
+                    <div class="w-16 h-16 rounded-full bg-violet-600 flex items-center justify-center mx-auto mb-6 relative z-10">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-violet-400 font-semibold mb-2">步驟 4</div>
+                    <h3 class="text-xl font-semibold mb-2">匯出字幕</h3>
+                    <p class="text-gray-400 text-sm">匯出 SRT 字幕檔</p>
                 </div>
             </div>
         </div>
