@@ -730,6 +730,35 @@
             outline: 2px solid #A78BFA;
             outline-offset: 2px;
         }
+
+        /* Typewriter Effect */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+            margin-left: 2px;
+            animation: cursor-blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        .typewriter-cursor.hidden {
+            opacity: 0;
+        }
+
+        @keyframes cursor-blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .typewriter-text {
+            display: inline;
+        }
+
+        /* Ensure minimum height to prevent layout shift */
+        .typewriter-line {
+            min-height: 1.2em;
+        }
     </style>
 </head>
 <body class="mesh-gradient text-white min-h-screen font-body">
@@ -746,17 +775,17 @@
             <div class="grid md:grid-cols-2 gap-8 lg:gap-16 items-center max-w-6xl mx-auto">
                 <!-- Left Side - Text Content -->
                 <div class="text-center order-2 md:order-1">
-                    <!-- Title -->
+                    <!-- Title (Static) -->
                     <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 opacity-0 animate-fade-in-up animate-delay-100">
                         <span class="gradient-text">Whispify</span>
                     </h1>
 
-                    <!-- Tagline -->
-                    <p class="text-xl md:text-2xl text-gray-200 mb-3 opacity-0 animate-fade-in-up animate-delay-200 font-medium">
-                        影片字幕轉錄與翻譯工具
+                    <!-- Tagline with Typewriter -->
+                    <p class="text-xl md:text-2xl text-gray-200 mb-3 font-medium typewriter-line">
+                        <span class="typewriter-text" id="typewriter-tagline"></span><span class="typewriter-cursor" id="cursor-tagline"></span>
                     </p>
-                    <p class="text-lg text-gray-400 mb-8 opacity-0 animate-fade-in-up animate-delay-300">
-                        完全本地處理，保護你的隱私
+                    <p class="text-lg text-gray-400 mb-8 typewriter-line">
+                        <span class="typewriter-text" id="typewriter-subtitle"></span><span class="typewriter-cursor hidden" id="cursor-subtitle"></span>
                     </p>
 
                     <!-- Badges -->
@@ -1598,5 +1627,76 @@
             </div>
         </div>
     </div>
+
+    <!-- Typewriter Effect Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const lines = [
+                {
+                    text: '影片字幕轉錄與翻譯工具',
+                    elementId: 'typewriter-tagline',
+                    cursorId: 'cursor-tagline',
+                    speed: 60
+                },
+                {
+                    text: '完全本地處理，保護你的隱私',
+                    elementId: 'typewriter-subtitle',
+                    cursorId: 'cursor-subtitle',
+                    speed: 45
+                }
+            ];
+
+            async function typeText(text, element, speed) {
+                for (let i = 0; i < text.length; i++) {
+                    element.textContent += text[i];
+                    await new Promise(resolve => setTimeout(resolve, speed));
+                }
+            }
+
+            async function clearAllText() {
+                lines.forEach(line => {
+                    document.getElementById(line.elementId).textContent = '';
+                    document.getElementById(line.cursorId).classList.add('hidden');
+                });
+            }
+
+            async function runTypewriter() {
+                while (true) {
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i];
+                        const textElement = document.getElementById(line.elementId);
+                        const cursorElement = document.getElementById(line.cursorId);
+
+                        // Hide previous cursor, show current cursor
+                        if (i > 0) {
+                            const prevCursor = document.getElementById(lines[i - 1].cursorId);
+                            prevCursor.classList.add('hidden');
+                        }
+                        cursorElement.classList.remove('hidden');
+
+                        // Type the text
+                        await typeText(line.text, textElement, line.speed);
+
+                        // Small pause between lines
+                        if (i < lines.length - 1) {
+                            await new Promise(resolve => setTimeout(resolve, 300));
+                        }
+                    }
+
+                    // Wait 3 seconds before restarting
+                    await new Promise(resolve => setTimeout(resolve, 3000));
+
+                    // Clear all text and reset
+                    clearAllText();
+
+                    // Small pause before restarting
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                }
+            }
+
+            // Start typewriter after a small delay
+            setTimeout(runTypewriter, 500);
+        });
+    </script>
 </body>
 </html>
