@@ -1113,8 +1113,288 @@
         </div>
     </section>
 
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-dark-secondary relative overflow-hidden">
+        <!-- Background Orbs -->
+        <div class="gradient-orb orb-purple absolute -top-32 -left-64 opacity-40"></div>
+        <div class="gradient-orb orb-cyan absolute bottom-0 -right-32 opacity-30"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Section Header -->
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-4 scroll-animate">
+                <span class="gradient-text">選擇適合你的方案</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto scroll-animate">
+                從免費版開始體驗，隨時升級解鎖更多強大功能
+            </p>
+
+            <!-- Pricing Cards -->
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-20">
+                <!-- Free Plan Card -->
+                <div class="feature-card p-8 scroll-animate-left relative" style="transition-delay: 0.1s;">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-display font-semibold text-white mb-2">免費版</h3>
+                        <p class="text-gray-400 text-sm">基本功能，輕鬆上手</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <span class="text-4xl font-display font-bold text-white">NT$ 0</span>
+                        <span class="text-gray-500 ml-2">/ 永久免費</span>
+                    </div>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-violet-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">Whisper 模型 Tiny ~ Medium</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-violet-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">3 個排程任務</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-violet-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-300">基本字幕匯出（SRT）</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            <span class="text-gray-500">GPU 加速</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            <span class="text-gray-500">雙語字幕匯出</span>
+                        </li>
+                    </ul>
+
+                    <!-- 按鈕暫時註解，之後再打開
+                    <button class="w-full py-4 rounded-xl font-semibold text-white bg-dark-surface border border-dark-border hover:border-violet-500/50 hover:bg-dark-elevated transition-all duration-300">
+                        開始使用
+                    </button>
+                    -->
+                </div>
+
+                <!-- Pro Plan Card -->
+                <div class="feature-card p-8 scroll-animate-right relative overflow-hidden" style="transition-delay: 0.2s;">
+                    <!-- Gradient Border Effect -->
+                    <div class="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-br from-violet-500 via-cyan-400 to-violet-600 opacity-60"></div>
+                    <div class="absolute inset-[1px] rounded-3xl bg-gradient-to-br from-dark-elevated to-dark-primary"></div>
+
+                    <!-- Glow Effect -->
+                    <div class="absolute -top-20 -right-20 w-40 h-40 bg-violet-500/20 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl"></div>
+
+                    <!-- Recommended Badge -->
+                    <div class="absolute -top-1 -right-1 z-20">
+                        <div class="relative">
+                            <!-- Glow effect behind badge -->
+                            <div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-lg blur-md opacity-60 animate-pulse"></div>
+                            <!-- Badge -->
+                            <span class="relative px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-bold shadow-xl shadow-amber-500/40 flex items-center gap-1.5 border border-amber-400/30">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                推薦
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-display font-semibold text-white mb-2">專業版</h3>
+                            <p class="text-gray-400 text-sm">解鎖全部功能，專業效率</p>
+                        </div>
+
+                        <div class="mb-2">
+                            <span class="text-4xl font-display font-bold gradient-text">???</span>
+                        </div>
+                        <p class="text-cyan-400 text-sm mb-8 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                            可用於 3 台設備
+                        </p>
+
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-gray-200">全部 Whisper 模型<span class="text-violet-400 text-sm ml-1">(含 Large V2、V3、V3 Turbo)</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-gray-200">無限排程任務</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-gray-200">GPU 加速<span class="text-amber-400 text-sm ml-1">(速度提升 2-10 倍)</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-gray-200">雙語字幕匯出<span class="text-cyan-400 text-sm ml-1">(原文/譯文/雙語)</span></span>
+                            </li>
+                        </ul>
+
+                        <!-- 按鈕暫時註解，之後再打開
+                        <button class="w-full btn-gradient py-4 rounded-xl font-semibold text-white">
+                            升級專業版
+                        </button>
+                        -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pro Features Highlight -->
+            <h3 class="text-2xl font-display font-semibold text-center mb-10 scroll-animate">
+                <span class="text-white">專業版</span>
+                <span class="gradient-text">獨家功能</span>
+            </h3>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto mb-20">
+                <!-- Feature 1: High Quality Models -->
+                <div class="feature-card p-6 text-center scroll-animate" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-600/30 to-violet-800/30 flex items-center justify-center mx-auto mb-4 border border-violet-500/20">
+                        <svg class="w-7 h-7 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-display font-semibold text-white mb-2">高品質模型</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        解鎖 Large V2、V3、V3 Turbo 模型，轉錄精準度更高
+                    </p>
+                </div>
+
+                <!-- Feature 2: Unlimited Queue -->
+                <div class="feature-card p-6 text-center scroll-animate" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-600/30 to-cyan-800/30 flex items-center justify-center mx-auto mb-4 border border-cyan-500/20">
+                        <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-display font-semibold text-white mb-2">無限排程</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        轉錄與翻譯排程數量無上限，批次處理更高效
+                    </p>
+                </div>
+
+                <!-- Feature 3: GPU Acceleration -->
+                <div class="feature-card p-6 text-center scroll-animate" style="transition-delay: 0.3s;">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-600/30 to-amber-800/30 flex items-center justify-center mx-auto mb-4 border border-amber-500/20">
+                        <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-display font-semibold text-white mb-2">GPU 加速</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        轉錄速度提升 2 至 10 倍，遠離無聊的等待
+                    </p>
+                </div>
+
+                <!-- Feature 4: Bilingual Export -->
+                <div class="feature-card p-6 text-center scroll-animate" style="transition-delay: 0.4s;">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-600/30 to-cyan-600/30 flex items-center justify-center mx-auto mb-4 border border-violet-500/20">
+                        <svg class="w-7 h-7 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-display font-semibold text-white mb-2">雙語字幕匯出</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        匯出原文、譯文、雙語三種 SRT 字幕格式
+                    </p>
+                </div>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="max-w-3xl mx-auto scroll-animate">
+                <h3 class="text-2xl font-display font-semibold text-center mb-8">
+                    <span class="gradient-text">版本比較</span>
+                </h3>
+
+                <div class="feature-card overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-dark-border">
+                                    <th class="text-left py-5 px-6 font-display font-semibold text-gray-300">功能</th>
+                                    <th class="text-center py-5 px-6 font-display font-semibold text-violet-400 whitespace-nowrap">免費版</th>
+                                    <th class="text-center py-5 px-6 font-display font-semibold text-cyan-400 whitespace-nowrap">專業版</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-dark-border/50">
+                                <tr class="hover:bg-dark-surface/30 transition-colors">
+                                    <td class="py-4 px-6 text-gray-300">Whisper 模型</td>
+                                    <td class="py-4 px-6 text-center text-gray-400">Tiny ~ Medium</td>
+                                    <td class="py-4 px-6 text-center text-white font-medium">全部模型</td>
+                                </tr>
+                                <tr class="hover:bg-dark-surface/30 transition-colors">
+                                    <td class="py-4 px-6 text-gray-300">排程數量</td>
+                                    <td class="py-4 px-6 text-center text-gray-400">3 個</td>
+                                    <td class="py-4 px-6 text-center text-white font-medium">無限制</td>
+                                </tr>
+                                <tr class="hover:bg-dark-surface/30 transition-colors">
+                                    <td class="py-4 px-6 text-gray-300">GPU 加速</td>
+                                    <td class="py-4 px-6 text-center">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-700/50">
+                                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-center">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-cyan-500/20">
+                                            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-dark-surface/30 transition-colors">
+                                    <td class="py-4 px-6 text-gray-300">雙語字幕匯出</td>
+                                    <td class="py-4 px-6 text-center">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-700/50">
+                                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-center">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-cyan-500/20">
+                                            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-dark-surface/30 transition-colors">
+                                    <td class="py-4 px-6 text-gray-300">設備授權</td>
+                                    <td class="py-4 px-6 text-center text-gray-400">不限</td>
+                                    <td class="py-4 px-6 text-center text-white font-medium">3 台</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
-    <section class="py-24 bg-dark-secondary relative overflow-hidden">
+    <section class="py-24 relative overflow-hidden">
         <!-- Background Orbs -->
         <div class="gradient-orb orb-purple absolute top-1/2 -left-64 -translate-y-1/2 opacity-40"></div>
         <div class="gradient-orb orb-cyan absolute top-1/2 -right-64 -translate-y-1/2 opacity-30"></div>
