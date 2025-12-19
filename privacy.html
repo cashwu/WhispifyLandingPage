@@ -220,7 +220,7 @@
                 <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">
                     <span class="gradient-text">隱私政策</span>
                 </h1>
-                <p class="text-gray-400">最後更新日期：2025 年 1 月</p>
+                <p class="text-gray-400">最後更新日期：2025 年 12 月</p>
             </div>
 
             <!-- Content Card -->
@@ -239,15 +239,22 @@
 
                     <!-- Section 1 -->
                     <h2>1. 資料收集</h2>
-                    <p>Whispify 不會收集、儲存或傳送您的個人資料至我們的伺服器。我們不使用任何分析工具或追蹤技術。</p>
+                    <p>Whispify 在大多數情況下不會收集您的個人資料。我們不使用任何分析工具或追蹤技術。</p>
 
                     <h3>我們不收集的資料：</h3>
                     <ul>
                         <li>個人身份資訊（姓名、電子郵件等）</li>
                         <li>您的影片或音訊檔案</li>
                         <li>使用行為或分析數據</li>
-                        <li>裝置識別碼或追蹤資訊</li>
                     </ul>
+
+                    <h3>專業版授權驗證：</h3>
+                    <p>當您啟用 Whispify 專業版時，為了驗證授權有效性，我們會收集並傳送以下資料至 Whispify 伺服器：</p>
+                    <ul>
+                        <li>您的 Mac 硬體識別碼（Hardware UUID）</li>
+                        <li>您輸入的產品序號</li>
+                    </ul>
+                    <p>這些資料僅用於驗證序號有效性及確認授權設備數量，我們不會將其用於其他目的或與第三方分享。</p>
 
                     <!-- Section 2 -->
                     <h2>2. 本機語音辨識</h2>
@@ -265,7 +272,7 @@
                     <ul>
                         <li>僅傳送<strong>文字字幕</strong>，不包含影片或音訊</li>
                         <li>您可以自行選擇和設定 API 服務提供商</li>
-                        <li>API 金鑰安全地儲存在 macOS 鑰匙圈（Keychain）中，受系統級加密保護</li>
+                        <li>API 金鑰以加密方式安全地儲存在應用程式的本機資料庫中</li>
                         <li>翻譯請求直接傳送至您設定的 API 端點</li>
                     </ul>
 
@@ -282,6 +289,7 @@
                         <li><strong>應用程式設定：</strong>您的偏好設定和 API 配置</li>
                         <li><strong>Whisper 模型：</strong>下載的語音辨識模型檔案</li>
                         <li><strong>輸出字幕：</strong>產生的 SRT 字幕檔案（儲存於您指定的位置）</li>
+                        <li><strong>序號與 API 金鑰：</strong>以加密方式儲存在應用程式資料庫中</li>
                     </ul>
                     <p>所有資料都儲存在您的 Mac 上，您可以隨時刪除這些資料。</p>
 
