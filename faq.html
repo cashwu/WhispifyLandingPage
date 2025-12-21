@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常見問題 - Whispify</title>
+    <meta name="description" content="Whispify 常見問題 - 了解如何安裝、使用，以及各版本功能差異">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="app-icon.webp">
+    <link rel="apple-touch-icon" href="app-icon.webp">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Outfit', 'Noto Sans TC', 'sans-serif'],
+                        body: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                    },
+                    colors: {
+                        violet: {
+                            50: '#F5F3FF',
+                            100: '#EDE9FE',
+                            200: '#DDD6FE',
+                            300: '#C4B5FD',
+                            400: '#A78BFA',
+                            500: '#8B5CF6',
+                            600: '#7C3AED',
+                            700: '#6D28D9',
+                            800: '#5B21B6',
+                            900: '#4C1D95',
+                        },
+                        cyan: {
+                            400: '#22D3EE',
+                            500: '#06B6D4',
+                            600: '#0891B2',
+                        },
+                        amber: {
+                            400: '#FBBF24',
+                            500: '#F59E0B',
+                        },
+                        dark: {
+                            abyss: '#050208',
+                            primary: '#0A0612',
+                            secondary: '#110B1A',
+                            elevated: '#1A1025',
+                            surface: '#241832',
+                            border: '#2D1F3D',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        /* Noise Texture Overlay */
+        .noise-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Mesh Gradient Background */
+        .mesh-gradient {
+            background:
+                radial-gradient(ellipse 80% 60% at 10% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 80% at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 100% 50% at 50% 0%, rgba(167, 139, 250, 0.06) 0%, transparent 40%),
+                linear-gradient(180deg, #050208 0%, #0A0612 50%, #110B1A 100%);
+        }
+
+        /* Enhanced Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 50%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(26, 16, 37, 0.9) 0%, rgba(17, 11, 26, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(124, 58, 237, 0.15);
+            position: relative;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.4), transparent);
+            border-radius: inherit;
+        }
+
+        /* Floating Gradient Orbs */
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .orb-purple {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, transparent 70%);
+        }
+
+        .orb-cyan {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Content Styling */
+        .faq-content p {
+            color: #9CA3AF;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .faq-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1rem;
+        }
+
+        .faq-content li {
+            color: #9CA3AF;
+            line-height: 1.8;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-content li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #7C3AED, #06B6D4);
+            border-radius: 50%;
+        }
+
+        .faq-content strong {
+            color: #E5E7EB;
+        }
+
+        .faq-content a {
+            color: #22D3EE;
+            transition: color 0.2s;
+        }
+
+        .faq-content a:hover {
+            color: #A78BFA;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7C3AED, #06B6D4);
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .screenshot-container {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            margin: 1rem 0;
+        }
+
+        .screenshot-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="mesh-gradient text-white min-h-screen font-body">
+    <!-- Noise Texture Overlay -->
+    <div class="noise-texture"></div>
+
+    <!-- Background Orbs -->
+    <div class="gradient-orb orb-purple absolute top-20 -left-48"></div>
+    <div class="gradient-orb orb-cyan absolute bottom-40 -right-32"></div>
+
+    <!-- Header -->
+    <header class="py-6 relative z-10">
+        <div class="container mx-auto px-6">
+            <a href="index.html" class="flex items-center gap-3 w-fit group">
+                <img src="app-icon.webp" alt="Whispify"
+                    class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
+                <span class="font-display font-semibold text-lg gradient-text">Whispify</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 py-12">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <!-- Title -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">
+                    <span class="gradient-text">常見問題</span>
+                </h1>
+                <p class="text-gray-400">關於 Whispify 的常見問題解答</p>
+            </div>
+
+            <!-- FAQ Card -->
+            <div class="glass-card rounded-3xl overflow-hidden">
+                <!-- FAQ 1: 如何下載並安裝 -->
+                <div class="faq-item">
+                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
+                        <h2 class="text-lg md:text-xl font-display font-semibold text-white pr-4">如何下載並安裝 App？</h2>
+                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
+                            <p>您可以前往我們的 <a href="https://github.com/cashwu/WhispifyApp/releases" target="_blank"
+                                    rel="noopener noreferrer">GitHub Releases</a> 頁面下載最新版本的 App。</p>
+
+                            <div class="highlight-box">
+                                <p class="text-amber-400 font-semibold flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                        </path>
+                                    </svg>
+                                    安全性提示（自我簽名 App）
+                                </p>
+                            </div>
+
+                            <p>由於目前 App 使用自我簽名，首次開啟時 macOS 會顯示安全性警告。請按照以下步驟操作：</p>
+
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex items-start gap-3 mb-3">
+                                        <span class="step-number">1</span>
+                                        <p class="text-gray-300 mb-0">首次開啟 App 時，會出現無法打開的提示</p>
+                                    </div>
+                                    <div class="screenshot-container">
+                                        <img src="faq-01.webp" alt="安全性警告提示" loading="lazy">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex items-start gap-3 mb-3">
+                                        <span class="step-number">2</span>
+                                        <p class="text-gray-300 mb-0">前往 <strong>系統設定</strong> →
+                                            <strong>隱私權與安全性</strong>，找到相關的提示訊息，點選「<strong>強制打開</strong>」按鈕
+                                        </p>
+                                    </div>
+                                    <div class="screenshot-container">
+                                        <img src="faq-02.webp" alt="系統設定中強制打開選項" loading="lazy">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2: 版本差異 -->
+                <div class="faq-item">
+                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
+                        <h2 class="text-lg md:text-xl font-display font-semibold text-white pr-4">免費版和專業版有什麼差異？</h2>
+                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
+                            <p>兩個版本的主要差異如下：</p>
+
+                            <p><strong class="text-violet-400">免費版</strong>包含：</p>
+                            <ul>
+                                <li>Whisper 模型：Tiny ~ Medium</li>
+                                <li>最多 3 個排程任務</li>
+                                <li>基本字幕匯出（SRT）</li>
+                            </ul>
+
+                            <p><strong class="text-cyan-400">專業版</strong>額外解鎖：</p>
+                            <ul>
+                                <li>全部 Whisper 模型（含 Large V2、V3、V3 Turbo）</li>
+                                <li>無限排程任務</li>
+                                <li>GPU 加速（速度提升 2-10 倍）</li>
+                                <li>雙語字幕匯出（原文/譯文/雙語）</li>
+                                <li>可用於 3 台設備</li>
+                            </ul>
+
+                            <p>詳細比較請參考 <a href="index.html#pricing">價格方案</a> 頁面。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3: 回報問題 -->
+                <div class="faq-item">
+                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
+                        <h2 class="text-lg md:text-xl font-display font-semibold text-white pr-4">如何回報問題或建議功能？</h2>
+                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
+                            <p>我們歡迎您的反饋！您可以透過 <a href="https://github.com/cashwu/WhispifyApp/issues" target="_blank"
+                                    rel="noopener noreferrer">GitHub Issues</a> 回報問題或提出功能建議。</p>
+
+                            <p><strong>🐛 錯誤回報（Bug Report）</strong></p>
+                            <ul>
+                                <li>請先搜尋是否有類似問題</li>
+                                <li>建立新 Issue 時，請註明您使用的版本（Free 或 Pro）</li>
+                                <li>提供重現步驟、截圖、log 或螢幕錄影</li>
+                            </ul>
+
+                            <p><strong>✨ 功能許願（Feature Request）</strong></p>
+                            <ul>
+                                <li>歡迎提出您的想法！</li>
+                                <li>如果您希望某個功能加入專業版中，也請在描述中告訴我們</li>
+                            </ul>
+
+                            <div class="highlight-box">
+                                <p class="text-gray-300">
+                                    <strong class="text-violet-400">提醒：</strong>為了加速處理流程，請保持禮貌、提供完整資訊，並且不要在公開 Issue
+                                    中貼上任何敏感個資。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4: 語言支援 -->
+                <div class="faq-item">
+                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
+                        <h2 class="text-lg md:text-xl font-display font-semibold text-white pr-4">App 支援哪些語言？</h2>
+                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
+                            <p>Whispify 使用 OpenAI 的 Whisper 模型進行語音辨識，目前支援以下語言：</p>
+                            <ul>
+                                <li>英文（English）</li>
+                                <li>日文（日本語）</li>
+                                <li>中文</li>
+                            </ul>
+                            <p>您可以手動指定來源語言以提高辨識準確度。未來版本將加入更多語言支援。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 5: 隱私 -->
+                <div class="faq-item">
+                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
+                        <h2 class="text-lg md:text-xl font-display font-semibold text-white pr-4">我的影片會被上傳到雲端嗎？</h2>
+                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
+                            <div class="highlight-box">
+                                <p class="text-cyan-400 font-semibold">
+                                    不會！您的影片和音訊檔案完全不會離開您的裝置。
+                                </p>
+                            </div>
+
+                            <p>Whispify 使用 WhisperKit（基於 Apple CoreML）在您的 Mac <strong>本機</strong>執行語音辨識。這意味著：</p>
+                            <ul>
+                                <li>所有語音轉文字處理都在本機完成</li>
+                                <li>無需網路連線即可進行語音辨識</li>
+                                <li>處理完成後，原始檔案保持不變</li>
+                            </ul>
+
+                            <p><strong>關於 AI 翻譯功能：</strong></p>
+                            <p>當您使用 AI 翻譯功能時，僅會將<strong>字幕文字</strong>（非影片檔案）傳送至您所設定的 AI API 服務進行翻譯。您可以自行選擇和設定 API 服務提供商。
+                            </p>
+
+                            <p>詳細資訊請參閱我們的 <a href="privacy.html">隱私政策</a>。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Link -->
+            <div class="text-center mt-10">
+                <a href="index.html"
+                    class="inline-flex items-center gap-2 text-gray-400 hover:text-violet-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                        </path>
+                    </svg>
+                    返回首頁
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 border-t border-dark-border relative z-10 mt-12">
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-px bg-gradient-to-r from-transparent via-violet-600/50 to-transparent">
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3 group">
+                    <img src="app-icon.webp" alt="Whispify"
+                        class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
+                    <span class="font-display font-semibold text-lg gradient-text">Whispify</span>
+                </div>
+                <p class="text-gray-600 text-sm">
+                    © 2025 Whispify. All rights reserved.
+                </p>
+                <div class="flex items-center gap-6">
+                    <a href="faq.html" class="text-violet-400 text-sm">
+                        常見問題
+                    </a>
+                    <a href="privacy.html" class="text-gray-500 text-sm hover:text-violet-400 transition-colors">
+                        隱私政策
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FAQ Toggle Script -->
+    <script>
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const isOpen = faqItem.classList.contains('open');
+
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('open');
+            });
+
+            // Toggle current FAQ
+            if (!isOpen) {
+                faqItem.classList.add('open');
+            }
+        }
+
+        // Open first FAQ by default
+        document.addEventListener('DOMContentLoaded', function () {
+            const firstFaq = document.querySelector('.faq-item');
+            if (firstFaq) {
+                firstFaq.classList.add('open');
+            }
+        });
+    </script>
+</body>
+
+</html>
