@@ -246,6 +246,28 @@
         .release-content strong {
             color: #E5E7EB;
         }
+
+        /* Permalink Button */
+        .permalink-btn {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            padding: 0.25rem;
+            border-radius: 4px;
+            color: #6B7280;
+        }
+
+        .permalink-btn:hover {
+            color: #A78BFA;
+            background: rgba(167, 139, 250, 0.1);
+        }
+
+        .release-card:hover .permalink-btn {
+            opacity: 1;
+        }
+
+        .permalink-btn.copied {
+            color: #22C55E;
+        }
     </style>
 </head>
 
@@ -284,8 +306,88 @@
                 <!-- Timeline Line -->
                 <div class="timeline-line hidden md:block"></div>
 
+                <!-- Release v1.0.0-beta.3 -->
+                <div id="v1.0.0-beta.3" class="relative md:pl-16 mb-12">
+                    <!-- Timeline Dot -->
+                    <div class="timeline-dot hidden md:flex">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z">
+                            </path>
+                        </svg>
+                    </div>
+
+                    <div class="release-card rounded-2xl overflow-hidden">
+                        <!-- Release Header -->
+                        <div class="p-6 border-b border-violet-500/20">
+                            <div class="flex flex-wrap items-center gap-3 mb-3">
+                                <h2 class="text-2xl font-display font-bold text-white">v1.0.0-beta.3</h2>
+                                <span class="version-badge beta-badge">Beta</span>
+                                <button class="permalink-btn" onclick="copyPermalink('v1.0.0-beta.3')" title="複製連結">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-4 text-sm text-gray-400">
+                                <span class="flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                    2025 年 12 月 22 日
+                                </span>
+                                <span class="flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                    macOS
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Release Content -->
+                        <div class="p-6 release-content">
+                            <!-- Improvements -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="change-tag tag-improved">改進</span>
+                                </div>
+                                <ul>
+                                    <li><strong>macOS 14 介面優化</strong> — 修復 macOS 14 的 UI 跑版問題</li>
+                                    <li><strong>複製提示詞按鈕</strong> — 新增複製相關提示詞的快捷按鈕</li>
+                                </ul>
+                            </div>
+
+                            <!-- Download Link -->
+                            <div class="mt-6 pt-6 border-t border-violet-500/20">
+                                <a href="https://github.com/cashwu/WhispifyApp/releases/tag/1.0.0-beta.3"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 text-cyan-400 hover:text-violet-400 transition-colors">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    在 GitHub 查看完整 Release
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Release v1.0.0-beta.2 -->
-                <div class="relative md:pl-16 mb-12">
+                <div id="v1.0.0-beta.2" class="relative md:pl-16 mb-12">
                     <!-- Timeline Dot -->
                     <div class="timeline-dot hidden md:flex">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -301,6 +403,13 @@
                             <div class="flex flex-wrap items-center gap-3 mb-3">
                                 <h2 class="text-2xl font-display font-bold text-white">v1.0.0-beta.2</h2>
                                 <span class="version-badge beta-badge">Beta</span>
+                                <button class="permalink-btn" onclick="copyPermalink('v1.0.0-beta.2')" title="複製連結">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                                        </path>
+                                    </svg>
+                                </button>
                             </div>
                             <div class="flex items-center gap-4 text-sm text-gray-400">
                                 <span class="flex items-center gap-2">
@@ -357,7 +466,7 @@
                 </div>
 
                 <!-- Release v1.0.0-beta-1 -->
-                <div class="relative md:pl-16 mb-12">
+                <div id="v1.0.0-beta-1" class="relative md:pl-16 mb-12">
                     <!-- Timeline Dot -->
                     <div class="timeline-dot hidden md:flex">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -373,7 +482,15 @@
                             <div class="flex flex-wrap items-center gap-3 mb-3">
                                 <h2 class="text-2xl font-display font-bold text-white">v1.0.0-beta-1</h2>
                                 <span class="version-badge beta-badge">Beta</span>
-                                <span class="text-gray-500 text-sm ml-auto">🎉 首次發布</span>
+                                <span class="text-gray-500 text-sm">🎉 首次發布</span>
+                                <button class="permalink-btn ml-auto" onclick="copyPermalink('v1.0.0-beta-1')"
+                                    title="複製連結">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                                        </path>
+                                    </svg>
+                                </button>
                             </div>
                             <div class="flex items-center gap-4 text-sm text-gray-400">
                                 <span class="flex items-center gap-2">
@@ -502,5 +619,24 @@
     </footer>
 
 </body>
+
+<script>
+    function copyPermalink(versionId) {
+        const url = window.location.origin + window.location.pathname + '#' + versionId;
+        navigator.clipboard.writeText(url).then(() => {
+            const btn = event.currentTarget;
+            btn.classList.add('copied');
+            btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>`;
+            setTimeout(() => {
+                btn.classList.remove('copied');
+                btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                </svg>`;
+            }, 2000);
+        });
+    }
+</script>
 
 </html>
