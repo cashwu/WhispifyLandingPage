@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下載 - Whispify</title>
+    <meta name="description" content="下載 Whispify - macOS 本地影片字幕轉錄與翻譯工具">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://whispify.cashwu.com/download.html">
+    <meta property="og:title" content="下載 - Whispify">
+    <meta property="og:description" content="下載 Whispify - macOS 本地影片字幕轉錄與翻譯工具">
+    <meta property="og:image" content="https://whispify.cashwu.com/og-image.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="Whispify">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://whispify.cashwu.com/download.html">
+    <meta name="twitter:title" content="下載 - Whispify">
+    <meta name="twitter:description" content="下載 Whispify - macOS 本地影片字幕轉錄與翻譯工具">
+    <meta name="twitter:image" content="https://whispify.cashwu.com/og-image.webp">
+    <meta name="twitter:creator" content="@cashwugeek">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="app-icon.webp">
+    <link rel="apple-touch-icon" href="app-icon.webp">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Outfit', 'Noto Sans TC', 'sans-serif'],
+                        body: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Menlo', 'Monaco', 'monospace'],
+                    },
+                    colors: {
+                        violet: {
+                            50: '#F5F3FF',
+                            100: '#EDE9FE',
+                            200: '#DDD6FE',
+                            300: '#C4B5FD',
+                            400: '#A78BFA',
+                            500: '#8B5CF6',
+                            600: '#7C3AED',
+                            700: '#6D28D9',
+                            800: '#5B21B6',
+                            900: '#4C1D95',
+                        },
+                        cyan: {
+                            400: '#22D3EE',
+                            500: '#06B6D4',
+                            600: '#0891B2',
+                        },
+                        amber: {
+                            400: '#FBBF24',
+                            500: '#F59E0B',
+                        },
+                        dark: {
+                            abyss: '#050208',
+                            primary: '#0A0612',
+                            secondary: '#110B1A',
+                            elevated: '#1A1025',
+                            surface: '#241832',
+                            border: '#2D1F3D',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+
+        /* Noise Texture Overlay */
+        .noise-texture {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Mesh Gradient Background */
+        .mesh-gradient {
+            background:
+                radial-gradient(ellipse 80% 60% at 10% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 80% at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 100% 50% at 50% 0%, rgba(167, 139, 250, 0.06) 0%, transparent 40%),
+                linear-gradient(180deg, #050208 0%, #0A0612 50%, #110B1A 100%);
+        }
+
+        /* Enhanced Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 50%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(26, 16, 37, 0.9) 0%, rgba(17, 11, 26, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(124, 58, 237, 0.15);
+            position: relative;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.4), transparent);
+            border-radius: inherit;
+        }
+
+        /* Floating Gradient Orbs */
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .orb-purple {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, transparent 70%);
+        }
+
+        .orb-cyan {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #0d0d0d;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 0.75rem;
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        .code-block:hover {
+            border-color: rgba(124, 58, 237, 0.4);
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', 'Menlo', 'Monaco', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: #e5e7eb;
+            word-break: break-all;
+            white-space: pre-wrap;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 0.5rem;
+            color: #A78BFA;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background: rgba(124, 58, 237, 0.3);
+            color: #C4B5FD;
+        }
+
+        .copy-btn.copied {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #22C55E;
+        }
+
+        /* Step Number */
+        .step-number {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7C3AED 0%, #06B6D4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 0.75rem;
+        }
+
+        /* Update Box */
+        .update-box {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(34, 197, 94, 0.1) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        /* Version Badge */
+        .version-badge {
+            background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1a1025;
+        }
+    </style>
+</head>
+
+<body class="mesh-gradient text-white min-h-screen font-body">
+    <!-- Noise Texture Overlay -->
+    <div class="noise-texture"></div>
+
+    <!-- Background Orbs -->
+    <div class="gradient-orb orb-purple absolute top-20 -left-48"></div>
+    <div class="gradient-orb orb-cyan absolute bottom-40 -right-32"></div>
+
+    <!-- Header -->
+    <header class="py-6 relative z-10">
+        <div class="container mx-auto px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 w-fit group">
+                <img src="app-icon.webp" alt="Whispify"
+                    class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
+                <span class="font-display font-semibold text-lg gradient-text">Whispify</span>
+            </a>
+            <nav class="flex items-center gap-6">
+                <a href="download.html" class="text-violet-400 text-sm">下載</a>
+                <a href="releases.html" class="text-gray-400 text-sm hover:text-violet-400 transition-colors">版本記錄</a>
+                <a href="faq.html" class="text-gray-400 text-sm hover:text-violet-400 transition-colors">常見問題</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 py-12">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <!-- Title -->
+            <div class="text-center mb-12">
+                <!-- Download Icon -->
+                <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4">
+                        </path>
+                    </svg>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">
+                    <span class="gradient-text">下載 Whispify</span>
+                </h1>
+                <p class="text-gray-400">
+                    目前版本 <span class="text-violet-400 font-semibold">v1.0.1</span>
+                    <span class="version-badge ml-2">Beta</span>
+                    <span class="mx-2">·</span>
+                    支援 macOS 14.0+
+                </p>
+            </div>
+
+            <!-- Quick Install Section -->
+            <div class="glass-card rounded-2xl overflow-hidden mb-8">
+                <div class="p-6">
+                    <!-- Header -->
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600/20 to-cyan-500/20 flex items-center justify-center border border-violet-500/30">
+                            <svg class="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-display font-bold text-white">macOS 快速安裝（推薦）</h2>
+                            <p class="text-sm text-gray-400">使用 Terminal 一鍵下載並安裝</p>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-300 mb-4">打開 Terminal，貼上以下指令即可自動下載、解除隔離並開啟安裝程式：</p>
+
+                    <!-- Code Block -->
+                    <div class="code-block p-4 pr-14">
+                        <code id="quick-install-code">curl -L https://github.com/cashwu/WhispifyApp/releases/download/v1.0.1/Whispify-v1.0.1.zip -o ~/Downloads/Whispify.zip && unzip -o ~/Downloads/Whispify.zip -d /Applications && xattr -cr /Applications/Whispify.app && open /Applications/Whispify.app</code>
+                        <button class="copy-btn" onclick="copyCode('quick-install-code', this)" title="複製指令">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <p class="text-sm text-gray-500 mt-4">
+                        此指令會下載 .zip 檔案，自動解壓縮到 Applications 資料夾，移除 macOS 隔離標記，然後開啟應用程式。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Manual Download Section -->
+            <div class="glass-card rounded-2xl overflow-hidden mb-8">
+                <div class="p-6">
+                    <!-- Header -->
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600/20 to-cyan-500/20 flex items-center justify-center border border-violet-500/30">
+                            <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4">
+                                </path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-display font-bold text-white">macOS 手動下載</h2>
+                            <p class="text-sm text-gray-400">支援 macOS 14.0 (Sonoma) 或更新版本</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-violet-500/20">
+                    <!-- Step 1 -->
+                    <div class="p-6 border-b border-violet-500/20">
+                        <div class="flex items-start gap-4">
+                            <span class="step-number">1</span>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-white mb-2">下載安裝檔</h3>
+                                <p class="text-gray-400 text-sm mb-4">前往 GitHub Releases 頁面下載 Whispify-v1.0.1.dmg 檔案。</p>
+                                <a href="https://github.com/cashwu/WhispifyApp/releases/tag/v1.0.1" target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 px-4 py-2 bg-dark-elevated border border-violet-500/30 rounded-lg text-violet-400 hover:bg-dark-surface hover:border-violet-500/50 transition-all text-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                        </path>
+                                    </svg>
+                                    前往 GitHub Releases
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="p-6 border-b border-violet-500/20">
+                        <div class="flex items-start gap-4">
+                            <span class="step-number">2</span>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-white mb-2">安裝應用程式</h3>
+                                <p class="text-gray-400 text-sm">雙擊下載的 .dmg 檔案解壓縮，將 Whispify.app 拖曳到 Applications 資料夾。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="p-6 border-b border-violet-500/20">
+                        <div class="flex items-start gap-4">
+                            <span class="step-number">3</span>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-white mb-2">解除 macOS 隔離（重要）</h3>
+                                <p class="text-gray-400 text-sm mb-4">由於應用程式未經 Apple 公證，macOS 會阻止開啟。請在 Terminal 執行以下指令解除隔離：</p>
+                                <div class="code-block p-4 pr-14 mb-3">
+                                    <code id="xattr-code">xattr -cr /Applications/Whispify.app</code>
+                                    <button class="copy-btn" onclick="copyCode('xattr-code', this)" title="複製指令">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p class="text-sm text-gray-500">這個步驟只需要執行一次，之後就可以正常開啟應用程式了。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="p-6">
+                        <div class="flex items-start gap-4">
+                            <span class="step-number">4</span>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-white mb-2">開啟 Whispify</h3>
+                                <p class="text-gray-400 text-sm">在 Applications 資料夾中找到 Whispify 並開啟，開始使用！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why quarantine info -->
+                <div class="p-6 bg-dark-elevated/50 border-t border-violet-500/20">
+                    <h4 class="font-semibold text-white mb-2">為什麼需要解除隔離？</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        macOS 的 Gatekeeper 安全機制會對從網路下載的未公證應用程式添加「隔離」標記。這是為了保護使用者免受惡意軟體的侵害。由於 Whispify 目前處於 Beta 階段，尚未申請 Apple 開發者帳號進行公證，因此需要手動解除隔離才能開啟。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Auto Update Section -->
+            <div class="update-box rounded-2xl p-6 mb-8">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-green-500/20 flex items-center justify-center border border-cyan-500/30 flex-shrink-0">
+                        <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-display font-semibold text-white mb-2">自動更新功能</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            好消息！安裝完成後，Whispify 會自動檢查更新。當有新版本時，應用程式會提示您下載並安裝，<span class="text-cyan-400 font-medium">無需再執行隔離解除步驟</span>。您只需要完成一次手動安裝，之後的更新都會自動處理。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Link -->
+            <div class="text-center mt-10">
+                <a href="index.html"
+                    class="inline-flex items-center gap-2 text-gray-400 hover:text-violet-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                        </path>
+                    </svg>
+                    返回首頁
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 border-t border-dark-border relative z-10 mt-12">
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-px bg-gradient-to-r from-transparent via-violet-600/50 to-transparent">
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3 group">
+                    <img src="app-icon.webp" alt="Whispify"
+                        class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
+                    <span class="font-display font-semibold text-lg gradient-text">Whispify</span>
+                </div>
+                <p class="text-gray-600 text-sm">
+                    © 2025 Whispify. All rights reserved.
+                </p>
+                <div class="flex items-center gap-6">
+                    <a href="download.html" class="text-violet-400 text-sm">
+                        下載
+                    </a>
+                    <a href="releases.html" class="text-gray-500 text-sm hover:text-violet-400 transition-colors">
+                        版本記錄
+                    </a>
+                    <a href="faq.html" class="text-gray-500 text-sm hover:text-violet-400 transition-colors">
+                        常見問題
+                    </a>
+                    <a href="privacy.html" class="text-gray-500 text-sm hover:text-violet-400 transition-colors">
+                        隱私政策
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function copyCode(elementId, button) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                button.classList.add('copied');
+                button.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>`;
+
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>`;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>
