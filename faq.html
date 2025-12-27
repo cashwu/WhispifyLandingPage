@@ -33,16 +33,15 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        display: ['Outfit', 'Noto Sans TC', 'sans-serif'],
+                        mono: ['Geist Mono', 'JetBrains Mono', 'monospace'],
                         body: ['Inter', 'Noto Sans TC', 'sans-serif'],
                     },
                     colors: {
@@ -62,10 +61,6 @@
                             400: '#22D3EE',
                             500: '#06B6D4',
                             600: '#0891B2',
-                        },
-                        amber: {
-                            400: '#FBBF24',
-                            500: '#F59E0B',
                         },
                         dark: {
                             abyss: '#050208',
@@ -98,7 +93,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 100;
-            opacity: 0.025;
+            opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
@@ -111,95 +106,102 @@
                 linear-gradient(180deg, #050208 0%, #0A0612 50%, #110B1A 100%);
         }
 
-        /* Enhanced Gradient Text */
-        .gradient-text {
-            background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 50%, #06B6D4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* Grid Pattern */
+        .grid-pattern {
+            background-image:
+                linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
 
-        /* Glass Card */
-        .glass-card {
-            background: linear-gradient(135deg, rgba(26, 16, 37, 0.9) 0%, rgba(17, 11, 26, 0.95) 100%);
-            backdrop-filter: blur(20px);
+        /* Category Filter */
+        .category-btn {
+            padding: 8px 16px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 12px;
+            color: #6B7280;
+            background: transparent;
             border: 1px solid rgba(124, 58, 237, 0.15);
-            position: relative;
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.4), transparent);
-            border-radius: inherit;
-        }
-
-        /* Floating Gradient Orbs */
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            pointer-events: none;
-        }
-
-        .orb-purple {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, transparent 70%);
-        }
-
-        .orb-cyan {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
-        }
-
-        /* FAQ Accordion */
-        .faq-item {
-            border-bottom: 1px solid rgba(124, 58, 237, 0.15);
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-        }
-
-        .faq-question {
+            border-radius: 20px;
+            transition: all 0.2s ease;
             cursor: pointer;
-            user-select: none;
         }
 
-        .faq-question:hover {
-            background: rgba(124, 58, 237, 0.05);
+        .category-btn:hover {
+            color: #A78BFA;
+            border-color: rgba(124, 58, 237, 0.3);
         }
 
-        .faq-answer {
-            max-height: 0;
+        .category-btn.active {
+            color: #fff;
+            background: rgba(124, 58, 237, 0.2);
+            border-color: rgba(124, 58, 237, 0.4);
+        }
+
+        /* FAQ Item */
+        .faq-item {
+            background: rgba(26, 16, 37, 0.5);
+            border: 1px solid rgba(124, 58, 237, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
             overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
         }
 
-        .faq-item.open .faq-answer {
-            max-height: 5000px;
-            transition: max-height 0.5s ease-in;
+        .faq-item:hover {
+            border-color: rgba(124, 58, 237, 0.25);
         }
 
-        .faq-icon {
-            transition: transform 0.3s ease;
+        .faq-item[open] {
+            background: rgba(26, 16, 37, 0.8);
+            border-color: rgba(124, 58, 237, 0.3);
         }
 
-        .faq-item.open .faq-icon {
+        .faq-item summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 20px 24px;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item summary::marker {
+            display: none;
+        }
+
+        /* Question Number */
+        .question-number {
+            font-family: 'Geist Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: #7C3AED;
+            min-width: 32px;
+        }
+
+        /* Expand Icon */
+        .expand-icon {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-item[open] .expand-icon {
             transform: rotate(180deg);
         }
 
-        /* Content Styling */
+        /* FAQ Content */
+        .faq-content {
+            padding: 0 24px 24px 24px;
+            border-top: 1px solid rgba(124, 58, 237, 0.1);
+        }
+
         .faq-content p {
             color: #9CA3AF;
             line-height: 1.8;
             margin-bottom: 1rem;
+        }
+
+        .faq-content p:last-child {
+            margin-bottom: 0;
         }
 
         .faq-content ul {
@@ -211,24 +213,22 @@
         .faq-content li {
             color: #9CA3AF;
             line-height: 1.8;
-            padding-left: 1.5rem;
+            padding-left: 1.25rem;
             position: relative;
             margin-bottom: 0.5rem;
         }
 
         .faq-content li::before {
-            content: '';
+            content: '→';
             position: absolute;
             left: 0;
-            top: 0.75rem;
-            width: 6px;
-            height: 6px;
-            background: linear-gradient(135deg, #7C3AED, #06B6D4);
-            border-radius: 50%;
+            color: #7C3AED;
+            font-family: 'Geist Mono', monospace;
         }
 
         .faq-content strong {
             color: #E5E7EB;
+            font-weight: 500;
         }
 
         .faq-content a {
@@ -240,35 +240,102 @@
             color: #A78BFA;
         }
 
-        /* Permalink Button */
-        .permalink-btn {
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            padding: 0.25rem;
+        /* Category Tag in Question */
+        .category-tag {
+            font-family: 'Geist Mono', monospace;
+            font-size: 10px;
+            padding: 3px 8px;
             border-radius: 4px;
-            color: #6B7280;
-            flex-shrink: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .permalink-btn:hover {
+        .tag-install {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ADE80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .tag-pricing {
+            background: rgba(251, 191, 36, 0.15);
+            color: #FCD34D;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .tag-license {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60A5FA;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .tag-support {
+            background: rgba(244, 114, 182, 0.15);
+            color: #F472B6;
+            border: 1px solid rgba(244, 114, 182, 0.3);
+        }
+
+        .tag-feature {
+            background: rgba(124, 58, 237, 0.15);
             color: #A78BFA;
-            background: rgba(167, 139, 250, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.3);
         }
 
-        .faq-question:hover .permalink-btn {
-            opacity: 1;
+        .tag-privacy {
+            background: rgba(6, 182, 212, 0.15);
+            color: #22D3EE;
+            border: 1px solid rgba(6, 182, 212, 0.3);
         }
 
-        .permalink-btn.copied {
+        /* Terminal Window */
+        .terminal-window {
+            background: #0c0c0c;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .terminal-header {
+            background: linear-gradient(180deg, #1a1a1a 0%, #141414 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #febc2e; }
+        .terminal-dot.green { background: #28c840; }
+
+        .terminal-body {
+            padding: 12px 16px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .terminal-prompt {
             color: #22C55E;
-            opacity: 1;
         }
 
+        .terminal-command {
+            color: #e5e7eb;
+            word-break: break-all;
+        }
+
+        /* Highlight Box */
         .highlight-box {
             background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
             border: 1px solid rgba(124, 58, 237, 0.2);
-            border-radius: 12px;
-            padding: 1.25rem;
+            border-radius: 8px;
+            padding: 16px;
             margin: 1rem 0;
         }
 
@@ -276,25 +343,25 @@
             margin-bottom: 0;
         }
 
+        /* Step Number */
         .step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #7C3AED, #06B6D4);
-            color: white;
-            font-weight: 600;
-            font-size: 0.875rem;
-            flex-shrink: 0;
+            font-family: 'Geist Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.4) 0%, rgba(6, 182, 212, 0.3) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 32px;
         }
 
+        /* Screenshot Container */
         .screenshot-container {
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             border: 1px solid rgba(124, 58, 237, 0.2);
-            margin: 1rem 0;
+            margin: 0.75rem 0;
         }
 
         .screenshot-container img {
@@ -302,6 +369,27 @@
             height: auto;
             display: block;
         }
+
+        /* Stagger Animation */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeSlideUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
     </style>
 </head>
 
@@ -309,9 +397,8 @@
     <!-- Noise Texture Overlay -->
     <div class="noise-texture"></div>
 
-    <!-- Background Orbs -->
-    <div class="gradient-orb orb-purple absolute top-20 -left-48"></div>
-    <div class="gradient-orb orb-cyan absolute bottom-40 -right-32"></div>
+    <!-- Grid Pattern Overlay -->
+    <div class="fixed inset-0 grid-pattern pointer-events-none"></div>
 
     <!-- Header -->
     <header class="py-6 relative z-10">
@@ -319,117 +406,116 @@
             <a href="index.html" class="flex items-center gap-3 w-fit group">
                 <img src="app-icon.webp" alt="Whispify"
                     class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
-                <span class="font-display font-semibold text-lg gradient-text">Whispify</span>
+                <span class="font-mono font-semibold text-lg text-violet-400">Whispify</span>
             </a>
             <nav class="flex items-center gap-6">
                 <a href="download.html" class="text-gray-400 text-sm hover:text-violet-400 transition-colors">下載</a>
                 <a href="releases.html" class="text-gray-400 text-sm hover:text-violet-400 transition-colors">版本記錄</a>
-                <a href="faq.html" class="text-violet-400 text-sm">常見問題</a>
+                <a href="faq.html" class="text-violet-400 text-sm font-medium">常見問題</a>
             </nav>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="relative z-10 py-12">
-        <div class="container mx-auto px-6 max-w-3xl">
-            <!-- Title -->
-            <div class="text-center mb-12">
-                <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">
-                    <span class="gradient-text">常見問題</span>
-                </h1>
-                <p class="text-gray-400">關於 Whispify 的常見問題解答</p>
-            </div>
-
-            <!-- FAQ Card -->
-            <div class="glass-card rounded-3xl overflow-hidden">
-                <!-- FAQ 1: 如何下載並安裝 -->
-                <div id="install" class="faq-item">
-                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
-                        <div class="flex items-center gap-2 min-w-0">
-                            <button class="permalink-btn flex-shrink-0" onclick="event.stopPropagation(); copyPermalink('install')" title="複製連結">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
-                                    </path>
-                                </svg>
-                            </button>
-                            <h2 class="text-lg md:text-xl font-display font-semibold text-white">如何下載並安裝 App？</h2>
-                        </div>
-                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section class="py-16 md:py-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center">
+                    <div class="animate-in">
+                        <p class="font-mono text-sm text-violet-400 tracking-widest uppercase mb-4">FAQ</p>
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">常見問題</h1>
+                        <p class="text-gray-400">找不到答案？歡迎到 <a href="https://github.com/cashwu/WhispifyApp/issues" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-violet-400 transition-colors">GitHub Issues</a> 提問</p>
                     </div>
-                    <div class="faq-answer">
-                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
-                            <p>請前往<a href="download.html">下載頁面</a>取得最新版本的 App。我們提供兩種安裝方式：</p>
+                </div>
+            </div>
+        </section>
 
-                            <div class="space-y-6 mt-6">
-                                <!-- 快速安裝 -->
-                                <div>
-                                    <div class="flex items-start gap-3 mb-3">
-                                        <span class="step-number">1</span>
-                                        <div>
-                                            <p class="text-gray-300 mb-2"><strong>快速安裝（推薦）</strong></p>
-                                            <p class="text-gray-400 text-sm mb-3">打開 Terminal，貼上以下指令即可一鍵完成下載、安裝、解除隔離並開啟 App：</p>
-                                            <div class="bg-dark-abyss rounded-lg p-3 border border-dark-border overflow-x-auto">
-                                                <code class="text-violet-300 text-sm whitespace-pre-wrap break-all">curl -L https://github.com/cashwu/WhispifyApp/releases/latest/download/Whispify.zip -o ~/Downloads/Whispify.zip && unzip -o ~/Downloads/Whispify.zip -d /Applications && xattr -cr /Applications/Whispify.app && open /Applications/Whispify.app</code>
+        <!-- FAQ Section -->
+        <section class="pb-16">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <!-- Category Filter -->
+                <div class="flex flex-wrap justify-center gap-2 mb-10 animate-in delay-1">
+                    <button class="category-btn active" onclick="filterFaq('all')">全部</button>
+                    <button class="category-btn" onclick="filterFaq('install')">安裝</button>
+                    <button class="category-btn" onclick="filterFaq('pricing')">方案</button>
+                    <button class="category-btn" onclick="filterFaq('license')">授權</button>
+                    <button class="category-btn" onclick="filterFaq('feature')">功能</button>
+                    <button class="category-btn" onclick="filterFaq('privacy')">隱私</button>
+                </div>
+
+                <!-- FAQ List -->
+                <div class="space-y-3 animate-in delay-2">
+                    <!-- FAQ 1: 如何下載並安裝 -->
+                    <details class="faq-item" id="install" data-category="install">
+                        <summary class="flex items-center justify-between">
+                            <div class="flex items-center gap-4 min-w-0">
+                                <span class="question-number">01</span>
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                    <span class="category-tag tag-install">安裝</span>
+                                    <h2 class="text-white font-medium">如何下載並安裝 App？</h2>
+                                </div>
+                            </div>
+                            <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="faq-content pt-4">
+                            <p>請前往<a href="download.html">下載頁面</a>取得最新版本。我們提供兩種安裝方式：</p>
+
+                            <div class="space-y-5 mt-4">
+                                <div class="flex gap-4">
+                                    <span class="step-number">1</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-2"><strong>快速安裝（推薦）</strong></p>
+                                        <p class="text-gray-400 text-sm mb-2">打開 Terminal，貼上以下指令即可一鍵完成：</p>
+                                        <div class="terminal-window">
+                                            <div class="terminal-header">
+                                                <span class="terminal-dot red"></span>
+                                                <span class="terminal-dot yellow"></span>
+                                                <span class="terminal-dot green"></span>
+                                            </div>
+                                            <div class="terminal-body">
+                                                <span class="terminal-prompt">$ </span>
+                                                <span class="terminal-command">curl -L https://github.com/cashwu/WhispifyApp/releases/latest/download/Whispify.zip -o ~/Downloads/Whispify.zip && unzip -o ~/Downloads/Whispify.zip -d /Applications && xattr -cr /Applications/Whispify.app && open /Applications/Whispify.app</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- 手動安裝 -->
-                                <div>
-                                    <div class="flex items-start gap-3">
-                                        <span class="step-number">2</span>
-                                        <div>
-                                            <p class="text-gray-300 mb-2"><strong>手動安裝</strong></p>
-                                            <p class="text-gray-400 text-sm">從 GitHub 下載 .dmg 檔案，安裝後需執行解除隔離指令。詳細步驟請參考<a href="download.html">下載頁面</a>。</p>
-                                        </div>
+                                <div class="flex gap-4">
+                                    <span class="step-number">2</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-1"><strong>手動安裝</strong></p>
+                                        <p class="text-gray-400 text-sm">從 GitHub 下載 .dmg 檔案，安裝後需執行解除隔離指令。詳細步驟請參考<a href="download.html">下載頁面</a>。</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="highlight-box mt-6">
-                                <p class="text-amber-400 font-semibold flex items-center gap-2 mb-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                        </path>
-                                    </svg>
-                                    為什麼需要解除隔離？
+                            <div class="highlight-box mt-4">
+                                <p class="text-sm text-gray-400">
+                                    <strong class="text-amber-400">為什麼需要解除隔離？</strong><br>
+                                    由於 App 尚未經過 Apple 公證，macOS 的 Gatekeeper 會阻止開啟。使用快速安裝指令會自動處理。
                                 </p>
-                                <p class="text-gray-400 text-sm">由於 App 尚未經過 Apple 公證，macOS 的 Gatekeeper 會阻止開啟。使用快速安裝指令會自動處理這個問題，您只需要在首次安裝時執行一次。</p>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </details>
 
-                <!-- FAQ 2: 版本差異 -->
-                <div id="free-vs-pro" class="faq-item">
-                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
-                        <div class="flex items-center gap-2 min-w-0">
-                            <button class="permalink-btn flex-shrink-0" onclick="event.stopPropagation(); copyPermalink('free-vs-pro')" title="複製連結">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
-                                    </path>
-                                </svg>
-                            </button>
-                            <h2 class="text-lg md:text-xl font-display font-semibold text-white">免費版和專業版有什麼差異？</h2>
-                        </div>
-                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
-                            <p>兩個版本的主要差異如下：</p>
-
+                    <!-- FAQ 2: 版本差異 -->
+                    <details class="faq-item" id="free-vs-pro" data-category="pricing">
+                        <summary class="flex items-center justify-between">
+                            <div class="flex items-center gap-4 min-w-0">
+                                <span class="question-number">02</span>
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                    <span class="category-tag tag-pricing">方案</span>
+                                    <h2 class="text-white font-medium">免費版和專業版有什麼差異？</h2>
+                                </div>
+                            </div>
+                            <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="faq-content pt-4">
                             <p><strong class="text-violet-400">免費版</strong>包含：</p>
                             <ul>
                                 <li>Whisper 模型：Tiny ~ Medium</li>
@@ -448,177 +534,144 @@
 
                             <p>詳細比較請參考 <a href="index.html#pricing">價格方案</a> 頁面。</p>
                         </div>
-                    </div>
-                </div>
+                    </details>
 
-                <!-- FAQ 3: Pro 授權管理 -->
-                <div id="pro-license" class="faq-item">
-                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
-                        <div class="flex items-center gap-2 min-w-0">
-                            <button class="permalink-btn flex-shrink-0" onclick="event.stopPropagation(); copyPermalink('pro-license')" title="複製連結">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
-                                    </path>
-                                </svg>
-                            </button>
-                            <h2 class="text-lg md:text-xl font-display font-semibold text-white">如何啟用與管理 Pro 授權？</h2>
-                        </div>
-                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
-                            <p>購買 Pro 版本後，您將收到一組序號。請按照以下步驟啟用您的 Pro 授權：</p>
+                    <!-- FAQ 3: Pro 授權管理 -->
+                    <details class="faq-item" id="pro-license" data-category="license">
+                        <summary class="flex items-center justify-between">
+                            <div class="flex items-center gap-4 min-w-0">
+                                <span class="question-number">03</span>
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                    <span class="category-tag tag-license">授權</span>
+                                    <h2 class="text-white font-medium">如何啟用與管理 Pro 授權？</h2>
+                                </div>
+                            </div>
+                            <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="faq-content pt-4">
+                            <p>購買 Pro 版本後，您將收到一組序號。請按照以下步驟啟用：</p>
 
-                            <p><strong class="text-cyan-400">🔐 啟用 Pro 授權</strong></p>
+                            <p class="text-cyan-400 font-medium mt-4 mb-3">啟用 Pro 授權</p>
 
-                            <div class="space-y-6">
-                                <div>
-                                    <div class="flex items-start gap-3 mb-3">
-                                        <span class="step-number">1</span>
-                                        <p class="text-gray-300 mb-0">開啟 Whispify Pro，點選 <strong>管理授權</strong></p>
-                                    </div>
-                                    <div class="screenshot-container">
-                                        <img src="license-01.webp" alt="管理授權入口" loading="lazy">
+                            <div class="space-y-4">
+                                <div class="flex gap-4">
+                                    <span class="step-number">1</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 text-sm mb-2">開啟 Whispify Pro，點選 <strong>管理授權</strong></p>
+                                        <div class="screenshot-container">
+                                            <img src="license-01.webp" alt="管理授權入口" loading="lazy">
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div>
-                                    <div class="flex items-start gap-3 mb-3">
-                                        <span class="step-number">2</span>
-                                        <p class="text-gray-300 mb-0">點選 <strong>輸入序號</strong></p>
-                                    </div>
-                                    <div class="screenshot-container">
-                                        <img src="license-02.webp" alt="輸入序號選項" loading="lazy">
+                                <div class="flex gap-4">
+                                    <span class="step-number">2</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 text-sm mb-2">點選 <strong>輸入序號</strong></p>
+                                        <div class="screenshot-container">
+                                            <img src="license-02.webp" alt="輸入序號選項" loading="lazy">
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div>
-                                    <div class="flex items-start gap-3 mb-3">
-                                        <span class="step-number">3</span>
-                                        <p class="text-gray-300 mb-0">在對話框中輸入您的序號，點擊驗證按鈕完成啟用</p>
-                                    </div>
-                                    <div class="screenshot-container">
-                                        <img src="license-03.webp" alt="序號輸入對話框" loading="lazy">
-                                    </div>
-                                    <div class="screenshot-container">
-                                        <img src="license-04.webp" alt="序號驗證成功" loading="lazy">
+                                <div class="flex gap-4">
+                                    <span class="step-number">3</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 text-sm mb-2">輸入您的序號，點擊驗證按鈕完成啟用</p>
+                                        <div class="screenshot-container">
+                                            <img src="license-03.webp" alt="序號輸入對話框" loading="lazy">
+                                        </div>
+                                        <div class="screenshot-container">
+                                            <img src="license-04.webp" alt="序號驗證成功" loading="lazy">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="highlight-box mt-6">
-                                <p class="text-gray-300">
+                            <div class="highlight-box mt-4">
+                                <p class="text-sm text-gray-300">
                                     <strong class="text-violet-400">提醒：</strong>每組序號最多可在 <strong>3 台設備</strong>上使用。
                                 </p>
                             </div>
 
-                            <p class="mt-6"><strong class="text-cyan-400">🔓 解綁授權</strong></p>
-                            <p>若您需要更換裝置或解除綁定，可以透過以下方式操作：</p>
+                            <p class="text-cyan-400 font-medium mt-6 mb-3">解綁授權</p>
+                            <p class="text-sm">若您需要更換裝置或解除綁定：</p>
 
-                            <div class="space-y-6">
-                                <div>
-                                    <div class="flex items-start gap-3 mb-3">
-                                        <span class="step-number">1</span>
-                                        <p class="text-gray-300 mb-0">開啟
-                                            <strong>管理授權</strong>，您會看到兩個選項：<strong>解綁序號</strong> 和
-                                            <strong>清除所有綁定裝置</strong>
-                                        </p>
-                                    </div>
-                                    <div class="screenshot-container">
-                                        <img src="license-05.webp" alt="解綁選項" loading="lazy">
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div class="flex items-start gap-3 mb-3">
-                                        <span class="step-number">2</span>
-                                        <p class="text-gray-300 mb-0">點選任一選項後，都會出現確認對話框，請再次確認後才會執行</p>
+                            <div class="space-y-4 mt-3">
+                                <div class="flex gap-4">
+                                    <span class="step-number">1</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 text-sm mb-2">開啟<strong>管理授權</strong>，您會看到：<strong>解綁序號</strong> 和 <strong>清除所有綁定裝置</strong></p>
+                                        <div class="screenshot-container">
+                                            <img src="license-05.webp" alt="解綁選項" loading="lazy">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <ul class="mt-4">
-                                <li><strong>解綁序號</strong>：僅解除當前裝置的綁定，釋放一個設備名額</li>
-                                <li><strong>清除所有綁定裝置</strong>：解除此序號的所有裝置綁定，您可以重新在任意設備上啟用</li>
+                                <li><strong>解綁序號</strong>：僅解除當前裝置的綁定</li>
+                                <li><strong>清除所有綁定裝置</strong>：解除此序號的所有裝置綁定</li>
                             </ul>
                         </div>
-                    </div>
-                </div>
+                    </details>
 
-                <!-- FAQ 4: 回報問題 -->
-                <div id="report-issues" class="faq-item">
-                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
-                        <div class="flex items-center gap-2 min-w-0">
-                            <button class="permalink-btn flex-shrink-0" onclick="event.stopPropagation(); copyPermalink('report-issues')" title="複製連結">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
-                                    </path>
-                                </svg>
-                            </button>
-                            <h2 class="text-lg md:text-xl font-display font-semibold text-white">如何回報問題或建議功能？</h2>
-                        </div>
-                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
-                            <p>我們歡迎您的反饋！您可以透過 <a href="https://github.com/cashwu/WhispifyApp/issues" target="_blank"
-                                    rel="noopener noreferrer">GitHub Issues</a> 回報問題或提出功能建議。</p>
+                    <!-- FAQ 4: 回報問題 -->
+                    <details class="faq-item" id="report-issues" data-category="support">
+                        <summary class="flex items-center justify-between">
+                            <div class="flex items-center gap-4 min-w-0">
+                                <span class="question-number">04</span>
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                    <span class="category-tag tag-support">支援</span>
+                                    <h2 class="text-white font-medium">如何回報問題或建議功能？</h2>
+                                </div>
+                            </div>
+                            <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="faq-content pt-4">
+                            <p>我們歡迎您的反饋！請透過 <a href="https://github.com/cashwu/WhispifyApp/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a> 回報問題或提出功能建議。</p>
 
-                            <p><strong>🐛 錯誤回報（Bug Report）</strong></p>
+                            <p><strong>錯誤回報（Bug Report）</strong></p>
                             <ul>
                                 <li>請先搜尋是否有類似問題</li>
-                                <li>建立新 Issue 時，請註明您使用的版本（Free 或 Pro）</li>
+                                <li>建立新 Issue 時，請註明您使用的版本</li>
                                 <li>提供重現步驟、截圖、log 或螢幕錄影</li>
                             </ul>
 
-                            <p><strong>✨ 功能許願（Feature Request）</strong></p>
+                            <p><strong>功能許願（Feature Request）</strong></p>
                             <ul>
                                 <li>歡迎提出您的想法！</li>
-                                <li>如果您希望某個功能加入專業版中，也請在描述中告訴我們</li>
+                                <li>如果您希望某個功能加入專業版中，也請說明</li>
                             </ul>
 
                             <div class="highlight-box">
-                                <p class="text-gray-300">
-                                    <strong class="text-violet-400">提醒：</strong>為了加速處理流程，請保持禮貌、提供完整資訊，並且不要在公開 Issue
-                                    中貼上任何敏感個資。
+                                <p class="text-sm text-gray-400">
+                                    <strong class="text-violet-400">提醒：</strong>請保持禮貌、提供完整資訊，不要在公開 Issue 中貼上敏感個資。
                                 </p>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </details>
 
-                <!-- FAQ 5: 語言支援 -->
-                <div id="languages" class="faq-item">
-                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
-                        <div class="flex items-center gap-2 min-w-0">
-                            <button class="permalink-btn flex-shrink-0" onclick="event.stopPropagation(); copyPermalink('languages')" title="複製連結">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
-                                    </path>
-                                </svg>
-                            </button>
-                            <h2 class="text-lg md:text-xl font-display font-semibold text-white">App 支援哪些語言？</h2>
-                        </div>
-                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
-                            <p>Whispify 使用 OpenAI 的 Whisper 模型進行語音辨識，目前支援以下語言：</p>
+                    <!-- FAQ 5: 語言支援 -->
+                    <details class="faq-item" id="languages" data-category="feature">
+                        <summary class="flex items-center justify-between">
+                            <div class="flex items-center gap-4 min-w-0">
+                                <span class="question-number">05</span>
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                    <span class="category-tag tag-feature">功能</span>
+                                    <h2 class="text-white font-medium">App 支援哪些語言？</h2>
+                                </div>
+                            </div>
+                            <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="faq-content pt-4">
+                            <p>Whispify 使用 OpenAI 的 Whisper 模型進行語音辨識，目前支援：</p>
                             <ul>
                                 <li>英文（English）</li>
                                 <li>日文（日本語）</li>
@@ -626,37 +679,30 @@
                             </ul>
                             <p>您可以手動指定來源語言以提高辨識準確度。未來版本將加入更多語言支援。</p>
                         </div>
-                    </div>
-                </div>
+                    </details>
 
-                <!-- FAQ 6: 隱私 -->
-                <div id="privacy" class="faq-item">
-                    <div class="faq-question flex items-center justify-between p-6 md:p-8" onclick="toggleFaq(this)">
-                        <div class="flex items-center gap-2 min-w-0">
-                            <button class="permalink-btn flex-shrink-0" onclick="event.stopPropagation(); copyPermalink('privacy')" title="複製連結">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
-                                    </path>
-                                </svg>
-                            </button>
-                            <h2 class="text-lg md:text-xl font-display font-semibold text-white">我的影片會被上傳到雲端嗎？</h2>
-                        </div>
-                        <svg class="faq-icon w-6 h-6 text-violet-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
-                            <div class="highlight-box">
-                                <p class="text-cyan-400 font-semibold">
+                    <!-- FAQ 6: 隱私 -->
+                    <details class="faq-item" id="privacy" data-category="privacy">
+                        <summary class="flex items-center justify-between">
+                            <div class="flex items-center gap-4 min-w-0">
+                                <span class="question-number">06</span>
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                    <span class="category-tag tag-privacy">隱私</span>
+                                    <h2 class="text-white font-medium">我的影片會被上傳到雲端嗎？</h2>
+                                </div>
+                            </div>
+                            <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="faq-content pt-4">
+                            <div class="highlight-box mb-4">
+                                <p class="text-cyan-400 font-medium">
                                     不會！您的影片和音訊檔案完全不會離開您的裝置。
                                 </p>
                             </div>
 
-                            <p>Whispify 使用 WhisperKit（基於 Apple CoreML）在您的 Mac <strong>本機</strong>執行語音辨識。這意味著：</p>
+                            <p>Whispify 使用 WhisperKit（基於 Apple CoreML）在您的 Mac <strong>本機</strong>執行語音辨識：</p>
                             <ul>
                                 <li>所有語音轉文字處理都在本機完成</li>
                                 <li>無需網路連線即可進行語音辨識</li>
@@ -664,43 +710,38 @@
                             </ul>
 
                             <p><strong>關於 AI 翻譯功能：</strong></p>
-                            <p>當您使用 AI 翻譯功能時，僅會將<strong>字幕文字</strong>（非影片檔案）傳送至您所設定的 AI API 服務進行翻譯。您可以自行選擇和設定 API 服務提供商。
-                            </p>
+                            <p class="text-sm">當您使用 AI 翻譯功能時，僅會將<strong>字幕文字</strong>（非影片檔案）傳送至您所設定的 AI API 服務進行翻譯。</p>
 
                             <p>詳細資訊請參閱我們的 <a href="privacy.html">隱私政策</a>。</p>
                         </div>
-                    </div>
+                    </details>
+                </div>
+
+                <!-- Back Link -->
+                <div class="text-center mt-16">
+                    <a href="index.html"
+                        class="inline-flex items-center gap-2 text-gray-400 hover:text-violet-400 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                        返回首頁
+                    </a>
                 </div>
             </div>
-
-            <!-- Back Link -->
-            <div class="text-center mt-10">
-                <a href="index.html"
-                    class="inline-flex items-center gap-2 text-gray-400 hover:text-violet-400 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                        </path>
-                    </svg>
-                    返回首頁
-                </a>
-            </div>
-        </div>
+        </section>
     </main>
 
     <!-- Footer -->
-    <footer class="py-10 border-t border-dark-border relative z-10 mt-12">
-        <div
-            class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-px bg-gradient-to-r from-transparent via-violet-600/50 to-transparent">
-        </div>
+    <footer class="py-10 border-t border-dark-border relative z-10">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center gap-3 group">
                     <img src="app-icon.webp" alt="Whispify"
                         class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
-                    <span class="font-display font-semibold text-lg gradient-text">Whispify</span>
+                    <span class="font-mono font-semibold text-lg text-violet-400">Whispify</span>
                 </div>
-                <p class="text-gray-600 text-sm">
-                    © 2025 Whispify. All rights reserved.
+                <p class="text-gray-600 text-sm font-mono">
+                    © 2025 Whispify
                 </p>
                 <div class="flex items-center gap-6">
                     <a href="download.html" class="text-gray-500 text-sm hover:text-violet-400 transition-colors">
@@ -720,61 +761,34 @@
         </div>
     </footer>
 
-    <!-- FAQ Toggle Script -->
     <script>
-        function toggleFaq(element) {
-            const faqItem = element.parentElement;
-            const isOpen = faqItem.classList.contains('open');
+        // Filter FAQ by category
+        function filterFaq(category) {
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
 
-            // Close all other FAQs
+            // Filter items
             document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('open');
-            });
-
-            // Toggle current FAQ
-            if (!isOpen) {
-                faqItem.classList.add('open');
-            }
-        }
-
-        function copyPermalink(faqId) {
-            const url = window.location.origin + window.location.pathname + '#' + faqId;
-            navigator.clipboard.writeText(url).then(() => {
-                const btn = event.currentTarget;
-                btn.classList.add('copied');
-                btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>`;
-                setTimeout(() => {
-                    btn.classList.remove('copied');
-                    btn.innerHTML = `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
-                    </svg>`;
-                }, 2000);
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                    item.removeAttribute('open');
+                }
             });
         }
 
-        // Handle hash on page load and open corresponding FAQ
-        document.addEventListener('DOMContentLoaded', function () {
+        // Handle hash on page load
+        document.addEventListener('DOMContentLoaded', function() {
             const hash = window.location.hash.substring(1);
-            let targetFaq = null;
-
             if (hash) {
-                targetFaq = document.getElementById(hash);
-            }
-
-            if (targetFaq && targetFaq.classList.contains('faq-item')) {
-                // Open the FAQ from hash
-                targetFaq.classList.add('open');
-                // Scroll to it with a small delay to ensure layout is ready
-                setTimeout(() => {
-                    targetFaq.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-            } else {
-                // Open first FAQ by default
-                const firstFaq = document.querySelector('.faq-item');
-                if (firstFaq) {
-                    firstFaq.classList.add('open');
+                const targetFaq = document.getElementById(hash);
+                if (targetFaq && targetFaq.classList.contains('faq-item')) {
+                    targetFaq.setAttribute('open', '');
+                    setTimeout(() => {
+                        targetFaq.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
                 }
             }
         });
