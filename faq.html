@@ -363,44 +363,45 @@
                     </div>
                     <div class="faq-answer">
                         <div class="faq-content px-6 md:px-8 pb-6 md:pb-8">
-                            <p>您可以前往我們的 <a href="https://github.com/cashwu/WhispifyApp/releases" target="_blank"
-                                    rel="noopener noreferrer">GitHub Releases</a> 頁面下載最新版本的 App。</p>
+                            <p>請前往<a href="download.html">下載頁面</a>取得最新版本的 App。我們提供兩種安裝方式：</p>
 
-                            <div class="highlight-box">
-                                <p class="text-amber-400 font-semibold flex items-center gap-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
-                                        </path>
-                                    </svg>
-                                    安全性提示（自我簽名 App）
-                                </p>
-                            </div>
-
-                            <p>由於目前 App 使用自我簽名，首次開啟時 macOS 會顯示安全性警告。請按照以下步驟操作：</p>
-
-                            <div class="space-y-6">
+                            <div class="space-y-6 mt-6">
+                                <!-- 快速安裝 -->
                                 <div>
                                     <div class="flex items-start gap-3 mb-3">
                                         <span class="step-number">1</span>
-                                        <p class="text-gray-300 mb-0">首次開啟 App 時，會出現無法打開的提示</p>
-                                    </div>
-                                    <div class="screenshot-container">
-                                        <img src="faq-01.webp" alt="安全性警告提示" loading="lazy">
+                                        <div>
+                                            <p class="text-gray-300 mb-2"><strong>快速安裝（推薦）</strong></p>
+                                            <p class="text-gray-400 text-sm mb-3">打開 Terminal，貼上以下指令即可一鍵完成下載、安裝、解除隔離並開啟 App：</p>
+                                            <div class="bg-dark-abyss rounded-lg p-3 border border-dark-border overflow-x-auto">
+                                                <code class="text-violet-300 text-sm whitespace-pre-wrap break-all">curl -L https://github.com/cashwu/WhispifyApp/releases/latest/download/Whispify.zip -o ~/Downloads/Whispify.zip && unzip -o ~/Downloads/Whispify.zip -d /Applications && xattr -cr /Applications/Whispify.app && open /Applications/Whispify.app</code>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
+                                <!-- 手動安裝 -->
                                 <div>
-                                    <div class="flex items-start gap-3 mb-3">
+                                    <div class="flex items-start gap-3">
                                         <span class="step-number">2</span>
-                                        <p class="text-gray-300 mb-0">前往 <strong>系統設定</strong> →
-                                            <strong>隱私權與安全性</strong>，找到相關的提示訊息，點選「<strong>強制打開</strong>」按鈕
-                                        </p>
-                                    </div>
-                                    <div class="screenshot-container">
-                                        <img src="faq-02.webp" alt="系統設定中強制打開選項" loading="lazy">
+                                        <div>
+                                            <p class="text-gray-300 mb-2"><strong>手動安裝</strong></p>
+                                            <p class="text-gray-400 text-sm">從 GitHub 下載 .dmg 檔案，安裝後需執行解除隔離指令。詳細步驟請參考<a href="download.html">下載頁面</a>。</p>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="highlight-box mt-6">
+                                <p class="text-amber-400 font-semibold flex items-center gap-2 mb-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                    為什麼需要解除隔離？
+                                </p>
+                                <p class="text-gray-400 text-sm">由於 App 尚未經過 Apple 公證，macOS 的 Gatekeeper 會阻止開啟。使用快速安裝指令會自動處理這個問題，您只需要在首次安裝時執行一次。</p>
                             </div>
                         </div>
                     </div>
