@@ -85,6 +85,13 @@
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
         }
 
+        .gradient-text {
+            background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 50%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         html,
         body {
             scrollbar-width: thin;
@@ -432,39 +439,47 @@
     <div class="fixed inset-0 grid-pattern pointer-events-none"></div>
 
     <!-- Header -->
-    <header class="py-6 relative z-10">
-        <div class="container mx-auto px-6 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3 w-fit group">
-                <img src="app-icon.webp" alt="Whispify"
-                    class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
-                <span class="font-mono font-semibold text-lg text-violet-400">Whispify</span>
-            </a>
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center gap-6">
-                <a href="download.html" class="text-gray-400 text-sm hover:text-violet-400 transition-colors">下載</a>
-                <a href="releases.html" class="text-gray-400 text-sm hover:text-violet-400 transition-colors">版本記錄</a>
-                <a href="faq.html" class="text-violet-400 text-sm font-medium">常見問題</a>
-                <a href="privacy.html" class="text-gray-400 text-sm hover:text-violet-400 transition-colors">隱私政策</a>
-            </nav>
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-gray-300 hover:text-white transition-colors p-2"
-                onclick="toggleMobileMenu()" aria-label="選單">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="menu-icon">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-                <svg class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="close-icon">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-        <!-- Mobile Menu -->
-        <div class="md:hidden hidden px-6 pb-4" id="mobile-menu">
-            <nav class="pt-4 border-t border-dark-border/50 flex flex-col gap-3">
-                <a href="download.html" class="text-gray-400 text-sm hover:text-violet-400 transition-colors py-2">下載</a>
-                <a href="releases.html" class="text-gray-400 text-sm hover:text-violet-400 transition-colors py-2">版本記錄</a>
-                <a href="faq.html" class="text-violet-400 text-sm font-medium py-2">常見問題</a>
-                <a href="privacy.html" class="text-gray-400 text-sm hover:text-violet-400 transition-colors py-2">隱私政策</a>
-            </nav>
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="main-header">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="app-icon.webp" alt="Whispify"
+                        class="w-9 h-9 md:w-10 md:h-10 rounded-xl transition-transform group-hover:scale-105">
+                    <span class="font-display font-semibold text-lg gradient-text hidden sm:inline">Whispify</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="download.html"
+                        class="text-gray-300 hover:text-white transition-colors text-sm font-medium">下載</a>
+                    <a href="releases.html"
+                        class="text-gray-300 hover:text-white transition-colors text-sm font-medium">版本記錄</a>
+                    <a href="faq.html"
+                        class="text-violet-400 text-sm font-medium">常見問題</a>
+                    <a href="privacy.html"
+                        class="text-gray-300 hover:text-white transition-colors text-sm font-medium">隱私政策</a>
+                </nav>
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-300 hover:text-white transition-colors p-2"
+                    onclick="toggleMobileMenu()" aria-label="選單">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="menu-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="close-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div class="md:hidden hidden" id="mobile-menu">
+                <nav class="py-4 border-t border-dark-border/50 flex flex-col gap-4">
+                    <a href="download.html" class="text-gray-300 hover:text-white transition-colors text-sm font-medium py-2">下載</a>
+                    <a href="releases.html" class="text-gray-300 hover:text-white transition-colors text-sm font-medium py-2">版本記錄</a>
+                    <a href="faq.html" class="text-white text-sm font-medium py-2">常見問題</a>
+                    <a href="privacy.html" class="text-gray-300 hover:text-white transition-colors text-sm font-medium py-2">隱私政策</a>
+                </nav>
+            </div>
         </div>
     </header>
 
@@ -790,7 +805,7 @@
                 <div class="flex items-center gap-3 group">
                     <img src="app-icon.webp" alt="Whispify"
                         class="w-10 h-10 rounded-xl transition-transform group-hover:scale-105">
-                    <span class="font-mono font-semibold text-lg text-violet-400">Whispify</span>
+                    <span class="font-display font-semibold text-lg gradient-text">Whispify</span>
                 </div>
                 <p class="text-gray-600 text-sm font-mono">
                     © 2025 Whispify
