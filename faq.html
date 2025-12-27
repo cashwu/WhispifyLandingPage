@@ -208,15 +208,6 @@
             display: none;
         }
 
-        /* Question Number */
-        .question-number {
-            font-family: 'Geist Mono', monospace;
-            font-size: 14px;
-            font-weight: 600;
-            color: #7C3AED;
-            min-width: 32px;
-        }
-
         /* Expand Icon */
         .expand-icon {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -286,6 +277,8 @@
             border-radius: 4px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .tag-install {
@@ -516,12 +509,9 @@
                     <!-- FAQ 1: 如何下載並安裝 -->
                     <details class="faq-item" id="install" data-category="install">
                         <summary class="flex items-center justify-between">
-                            <div class="flex items-center gap-4 min-w-0">
-                                <span class="question-number">01</span>
-                                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                                    <span class="category-tag tag-install">安裝</span>
-                                    <h2 class="text-white font-medium">如何下載並安裝 App？</h2>
-                                </div>
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="category-tag tag-install">安裝</span>
+                                <h2 class="text-white font-medium">如何下載並安裝 App？</h2>
                             </div>
                             <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -571,12 +561,9 @@
                     <!-- FAQ 2: 版本差異 -->
                     <details class="faq-item" id="free-vs-pro" data-category="pricing">
                         <summary class="flex items-center justify-between">
-                            <div class="flex items-center gap-4 min-w-0">
-                                <span class="question-number">02</span>
-                                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                                    <span class="category-tag tag-pricing">方案</span>
-                                    <h2 class="text-white font-medium">免費版和專業版有什麼差異？</h2>
-                                </div>
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="category-tag tag-pricing">方案</span>
+                                <h2 class="text-white font-medium">免費版和專業版有什麼差異？</h2>
                             </div>
                             <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -606,12 +593,9 @@
                     <!-- FAQ 3: Pro 授權管理 -->
                     <details class="faq-item" id="pro-license" data-category="license">
                         <summary class="flex items-center justify-between">
-                            <div class="flex items-center gap-4 min-w-0">
-                                <span class="question-number">03</span>
-                                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                                    <span class="category-tag tag-license">授權</span>
-                                    <h2 class="text-white font-medium">如何啟用與管理 Pro 授權？</h2>
-                                </div>
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="category-tag tag-license">授權</span>
+                                <h2 class="text-white font-medium">如何啟用與管理 Pro 授權？</h2>
                             </div>
                             <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -688,12 +672,9 @@
                     <!-- FAQ 4: 回報問題 -->
                     <details class="faq-item" id="report-issues" data-category="support">
                         <summary class="flex items-center justify-between">
-                            <div class="flex items-center gap-4 min-w-0">
-                                <span class="question-number">04</span>
-                                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                                    <span class="category-tag tag-support">支援</span>
-                                    <h2 class="text-white font-medium">如何回報問題或建議功能？</h2>
-                                </div>
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="category-tag tag-support">支援</span>
+                                <h2 class="text-white font-medium">如何回報問題或建議功能？</h2>
                             </div>
                             <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -726,12 +707,9 @@
                     <!-- FAQ 5: 語言支援 -->
                     <details class="faq-item" id="languages" data-category="feature">
                         <summary class="flex items-center justify-between">
-                            <div class="flex items-center gap-4 min-w-0">
-                                <span class="question-number">05</span>
-                                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                                    <span class="category-tag tag-feature">功能</span>
-                                    <h2 class="text-white font-medium">App 支援哪些語言？</h2>
-                                </div>
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="category-tag tag-feature">功能</span>
+                                <h2 class="text-white font-medium">App 支援哪些語言？</h2>
                             </div>
                             <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -751,12 +729,9 @@
                     <!-- FAQ 6: 隱私 -->
                     <details class="faq-item" id="privacy" data-category="privacy">
                         <summary class="flex items-center justify-between">
-                            <div class="flex items-center gap-4 min-w-0">
-                                <span class="question-number">06</span>
-                                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                                    <span class="category-tag tag-privacy">隱私</span>
-                                    <h2 class="text-white font-medium">我的影片會被上傳到雲端嗎？</h2>
-                                </div>
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="category-tag tag-privacy">隱私</span>
+                                <h2 class="text-white font-medium">我的影片會被上傳到雲端嗎？</h2>
                             </div>
                             <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
