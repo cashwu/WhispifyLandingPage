@@ -727,7 +727,79 @@
                         </div>
                     </details>
 
-                    <!-- FAQ 6: 隱私 -->
+                    <!-- FAQ 7: Raycast AI 整合 -->
+                    <details class="faq-item" id="raycast-ai" data-category="feature">
+                        <summary class="flex items-center justify-between">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="category-tag tag-feature">功能</span>
+                                <h2 class="text-white font-medium">如何設定 Raycast AI 整合？</h2>
+                            </div>
+                            <svg class="expand-icon w-5 h-5 text-gray-500 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="faq-content pt-4">
+                            <p>Whispify 可以將字幕直接傳送到 Raycast AI Command 進行後續處理，例如摘要、翻譯或分析。</p>
+
+                            <div class="space-y-5 mt-4">
+                                <div class="flex gap-4">
+                                    <span class="step-number">1</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-2"><strong>在 Raycast 建立 AI Command</strong></p>
+                                        <p class="text-gray-400 text-sm mb-2">開啟 Raycast，建立一個新的 AI Command。在 Prompt 的最後加上 <code class="text-cyan-400 bg-dark-elevated px-1.5 py-0.5 rounded text-xs">{argument name="Argument"}</code> 參數，這樣 Whispify 才能將字幕傳入。</p>
+                                        <div class="screenshot-container">
+                                            <img src="raycast-ai-command.webp" alt="Raycast AI Command 設定畫面" loading="lazy">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4">
+                                    <span class="step-number">2</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-2"><strong>複製 AI Command 的 Deep Link</strong></p>
+                                        <p class="text-gray-400 text-sm">儲存後，複製該 AI Command 的 Deep Link URL，格式如下：</p>
+                                        <div class="terminal-window">
+                                            <div class="terminal-header">
+                                                <span class="terminal-dot red"></span>
+                                                <span class="terminal-dot yellow"></span>
+                                                <span class="terminal-dot green"></span>
+                                            </div>
+                                            <div class="terminal-body">
+                                                <span class="terminal-command">raycast://ai-commands/srt?arguments=</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4">
+                                    <span class="step-number">3</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-2"><strong>在 Whispify 設定 Deep Link</strong></p>
+                                        <p class="text-gray-400 text-sm mb-2">開啟 Whispify 的<strong>設定</strong>頁面，找到 <strong>Raycast AI</strong> 區塊，將 Deep Link URL 貼到輸入框中。</p>
+                                        <div class="screenshot-container">
+                                            <img src="raycast-setting.webp" alt="Whispify Raycast AI 設定" loading="lazy">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4">
+                                    <span class="step-number">4</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-2"><strong>使用方式</strong></p>
+                                        <p class="text-gray-400 text-sm">匯出字幕時，選擇<strong>「送到 Raycast AI」</strong>，Whispify 會自動將字幕內容傳送到你設定的 Raycast AI Command。</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="highlight-box mt-4">
+                                <p class="text-sm text-gray-400">
+                                    <strong class="text-violet-400">提示：</strong>你可以建立多個 AI Command 來處理不同任務，例如「整理重點」、「翻譯成英文」等，只需更換 Deep Link 即可切換。
+                                </p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- FAQ 8: 隱私 -->
                     <details class="faq-item" id="privacy" data-category="privacy">
                         <summary class="flex items-center justify-between">
                             <div class="flex items-center gap-3 min-w-0">
