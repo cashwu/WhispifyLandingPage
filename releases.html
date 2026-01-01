@@ -424,10 +424,10 @@
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
                             <div>
                                 <p class="font-mono text-xs text-gray-500 uppercase tracking-wider mb-2">Current Version</p>
-                                <div class="version-hero">1.0.5</div>
+                                <div class="version-hero">1.0.6</div>
                             </div>
                             <div class="flex flex-col items-start md:items-end gap-2">
-                                <span class="font-mono text-sm text-gray-400">2025.12.30</span>
+                                <span class="font-mono text-sm text-gray-400">2026.01.01</span>
                                 <span class="font-mono text-xs text-gray-600">Apple Silicon · macOS 14.0+</span>
                             </div>
                         </div>
@@ -435,17 +435,6 @@
                         <!-- Latest Release Content -->
                         <div class="border-t border-violet-500/20 pt-8">
                             <div class="grid md:grid-cols-1 gap-6">
-                                <!-- New Feature -->
-                                <div>
-                                    <div class="flex items-center gap-2 mb-4">
-                                        <span class="change-tag tag-new">新功能</span>
-                                    </div>
-                                    <div class="release-content">
-                                        <ul>
-                                            <li><strong>Raycast AI Command 整合</strong> — 支援透過 Raycast AI Command 快速啟動翻譯功能</li>
-                                        </ul>
-                                    </div>
-                                </div>
                                 <!-- Improved -->
                                 <div>
                                     <div class="flex items-center gap-2 mb-4">
@@ -453,19 +442,9 @@
                                     </div>
                                     <div class="release-content">
                                         <ul>
-                                            <li><strong>重新授權驗證流程</strong> — 調整重新授權驗證流程，提升使用體驗</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Fixed -->
-                                <div>
-                                    <div class="flex items-center gap-2 mb-4">
-                                        <span class="change-tag tag-fixed">修復</span>
-                                    </div>
-                                    <div class="release-content">
-                                        <ul>
-                                            <li><strong>macOS 14.4 驗證卡住</strong> — 修正 macOS 14.4 驗證卡住 UI 的問題</li>
-                                            <li><strong>取消後翻譯狀態</strong> — 修正取消後再翻譯的狀態問題</li>
+                                            <li><strong>翻譯預設 Prompt</strong> — 調整翻譯預設 prompt</li>
+                                            <li><strong>Raycast AI Command</strong> — 調整 Raycast AI Command 可以新增多組</li>
+                                            <li><strong>API Domain</strong> — 調整 API domain</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -473,7 +452,7 @@
 
                             <!-- GitHub Link -->
                             <div class="mt-8 pt-6 border-t border-violet-500/10">
-                                <a href="https://github.com/cashwu/WhispifyApp/releases/tag/1.0.5"
+                                <a href="https://github.com/cashwu/WhispifyApp/releases/tag/1.0.6"
                                     target="_blank" rel="noopener noreferrer"
                                     class="github-link inline-flex items-center gap-2 text-sm text-gray-400 hover:text-violet-400 transition-colors">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -499,6 +478,52 @@
                 </div>
 
                 <div class="space-y-3">
+                    <!-- v1.0.5 -->
+                    <details class="changelog-entry rounded-xl animate-in delay-2" id="v1.0.5">
+                        <summary class="p-5 flex flex-col sm:flex-row sm:items-center gap-3">
+                            <div class="flex items-center gap-3 flex-wrap flex-1 min-w-0">
+                                <span class="version-badge text-xl text-white">v1.0.5</span>
+                                <span class="font-mono text-xs text-gray-500">2025.12.30</span>
+                            </div>
+                            <div class="flex items-center gap-2 flex-wrap shrink-0">
+                                <span class="change-tag tag-new">新功能</span>
+                                <span class="change-tag tag-improved">改進</span>
+                                <span class="change-tag tag-fixed">修復</span>
+                                <svg class="expand-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </summary>
+                        <div class="px-5 pb-5 pt-2 border-t border-violet-500/10">
+                            <div class="release-content space-y-4">
+                                <div>
+                                    <p class="text-xs text-green-400 font-mono mb-2">// 新功能</p>
+                                    <ul>
+                                        <li><strong>Raycast AI Command 整合</strong> — 支援透過 Raycast AI Command 快速啟動翻譯功能</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-blue-400 font-mono mb-2">// 改進</p>
+                                    <ul>
+                                        <li><strong>重新授權驗證流程</strong> — 調整重新授權驗證流程，提升使用體驗</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-yellow-400 font-mono mb-2">// 修復</p>
+                                    <ul>
+                                        <li><strong>macOS 14.4 驗證卡住</strong> — 修正 macOS 14.4 驗證卡住 UI 的問題</li>
+                                        <li><strong>取消後翻譯狀態</strong> — 修正取消後再翻譯的狀態問題</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <a href="https://github.com/cashwu/WhispifyApp/releases/tag/1.0.5"
+                                target="_blank" rel="noopener noreferrer"
+                                class="github-link inline-flex items-center gap-2 text-xs text-gray-500 hover:text-violet-400 transition-colors mt-4">
+                                View on GitHub →
+                            </a>
+                        </div>
+                    </details>
+
                     <!-- v1.0.4 -->
                     <details class="changelog-entry rounded-xl animate-in delay-2" id="v1.0.4">
                         <summary class="p-5 flex flex-col sm:flex-row sm:items-center gap-3">
