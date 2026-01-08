@@ -424,10 +424,10 @@
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
                             <div>
                                 <p class="font-mono text-xs text-gray-500 uppercase tracking-wider mb-2">Current Version</p>
-                                <div class="version-hero">1.0.6</div>
+                                <div class="version-hero">1.0.7</div>
                             </div>
                             <div class="flex flex-col items-start md:items-end gap-2">
-                                <span class="font-mono text-sm text-gray-400">2026.01.01</span>
+                                <span class="font-mono text-sm text-gray-400">2026.01.08</span>
                                 <span class="font-mono text-xs text-gray-600">Apple Silicon · macOS 14.0+</span>
                             </div>
                         </div>
@@ -435,6 +435,18 @@
                         <!-- Latest Release Content -->
                         <div class="border-t border-violet-500/20 pt-8">
                             <div class="grid md:grid-cols-1 gap-6">
+                                <!-- New -->
+                                <div>
+                                    <div class="flex items-center gap-2 mb-4">
+                                        <span class="change-tag tag-new">新功能</span>
+                                    </div>
+                                    <div class="release-content">
+                                        <ul>
+                                            <li><strong>YouTube 下載功能</strong> — 整合 <a href="https://github.com/cashwu/Tubify" target="_blank" rel="noopener noreferrer" class="text-violet-400 hover:text-violet-300 transition-colors">Tubify</a> 實現 YouTube 影片下載功能</li>
+                                            <li><strong>原生分享功能</strong> — 新增原生分享功能，整合所有匯出相關功能變成一個動作按鈕</li>
+                                        </ul>
+                                    </div>
+                                </div>
                                 <!-- Improved -->
                                 <div>
                                     <div class="flex items-center gap-2 mb-4">
@@ -442,9 +454,7 @@
                                     </div>
                                     <div class="release-content">
                                         <ul>
-                                            <li><strong>翻譯預設 Prompt</strong> — 調整翻譯預設 prompt</li>
-                                            <li><strong>Raycast AI Command</strong> — 調整 Raycast AI Command 可以新增多組</li>
-                                            <li><strong>API Domain</strong> — 調整 API domain</li>
+                                            <li><strong>影片檔案格式</strong> — 調整影片檔只能選擇 MP4 格式</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -452,7 +462,7 @@
 
                             <!-- GitHub Link -->
                             <div class="mt-8 pt-6 border-t border-violet-500/10">
-                                <a href="https://github.com/cashwu/WhispifyApp/releases/tag/1.0.6"
+                                <a href="https://github.com/cashwu/WhispifyApp/releases/tag/1.0.7"
                                     target="_blank" rel="noopener noreferrer"
                                     class="github-link inline-flex items-center gap-2 text-sm text-gray-400 hover:text-violet-400 transition-colors">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -478,6 +488,37 @@
                 </div>
 
                 <div class="space-y-3">
+                    <!-- v1.0.6 -->
+                    <details class="changelog-entry rounded-xl animate-in delay-2" id="v1.0.6">
+                        <summary class="p-5 flex flex-col sm:flex-row sm:items-center gap-3">
+                            <div class="flex items-center gap-3 flex-wrap flex-1 min-w-0">
+                                <span class="version-badge text-xl text-white">v1.0.6</span>
+                                <span class="font-mono text-xs text-gray-500">2026.01.01</span>
+                            </div>
+                            <div class="flex items-center gap-2 flex-wrap shrink-0">
+                                <span class="change-tag tag-improved">改進</span>
+                                <svg class="expand-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </summary>
+                        <div class="px-5 pb-5 pt-2 border-t border-violet-500/10">
+                            <div class="release-content">
+                                <p class="text-xs text-blue-400 font-mono mb-2">// 改進</p>
+                                <ul>
+                                    <li><strong>翻譯預設 Prompt</strong> — 調整翻譯預設 prompt</li>
+                                    <li><strong>Raycast AI Command</strong> — 調整 Raycast AI Command 可以新增多組</li>
+                                    <li><strong>API Domain</strong> — 調整 API domain</li>
+                                </ul>
+                            </div>
+                            <a href="https://github.com/cashwu/WhispifyApp/releases/tag/1.0.6"
+                                target="_blank" rel="noopener noreferrer"
+                                class="github-link inline-flex items-center gap-2 text-xs text-gray-500 hover:text-violet-400 transition-colors mt-4">
+                                View on GitHub →
+                            </a>
+                        </div>
+                    </details>
+
                     <!-- v1.0.5 -->
                     <details class="changelog-entry rounded-xl animate-in delay-2" id="v1.0.5">
                         <summary class="p-5 flex flex-col sm:flex-row sm:items-center gap-3">
