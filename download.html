@@ -731,6 +731,19 @@
             });
         }
 
+        // Handle URL hash to switch platform
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash === '#win') {
+                document.getElementById('platform-macos').classList.add('hidden');
+                document.getElementById('platform-windows').classList.remove('hidden');
+                document.getElementById('hero-badge-macos').classList.add('hidden');
+                document.getElementById('hero-badge-windows').classList.remove('hidden');
+                document.querySelectorAll('.platform-tab-btn').forEach((btn, i) => {
+                    btn.classList.toggle('active', i === 1);
+                });
+            }
+        });
+
         // Mobile menu toggle
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobile-menu');

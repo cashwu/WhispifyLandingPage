@@ -516,7 +516,7 @@
                 <!-- Windows Latest Version -->
                 <div id="releases-windows" class="hidden">
                 <div class="max-w-4xl mx-auto mt-16 animate-in delay-1">
-                    <div class="latest-card rounded-3xl p-8 md:p-12">
+                    <div id="win-v1.0.0" class="latest-card rounded-3xl p-8 md:p-12">
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
                             <div>
                                 <p class="font-mono text-xs text-gray-500 uppercase tracking-wider mb-2">Current Version</p>
@@ -1147,11 +1147,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hash = window.location.hash;
             if (hash) {
-                // Check if hash target is in Windows section
-                const windowsSection = document.getElementById('releases-windows');
-                const target = document.querySelector(hash);
-                if (target && windowsSection && windowsSection.contains(target)) {
-                    // Switch to Windows tab
+                // 判斷是否為 Windows 版本 hash
+                if (hash.startsWith('#win-')) {
                     document.getElementById('releases-macos').classList.add('hidden');
                     document.getElementById('releases-windows').classList.remove('hidden');
                     document.getElementById('releases-macos-prev').classList.add('hidden');
@@ -1161,10 +1158,12 @@
                     });
                 }
 
-                const details = document.querySelector(hash);
-                if (details && details.tagName === 'DETAILS') {
-                    details.open = true;
-                    details.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const target = document.querySelector(hash);
+                if (target) {
+                    if (target.tagName === 'DETAILS') {
+                        target.open = true;
+                    }
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }
         });
