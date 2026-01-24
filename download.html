@@ -329,6 +329,29 @@
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
         .delay-4 { animation-delay: 0.4s; }
+
+        /* Platform Tab Buttons */
+        .platform-tab-btn {
+            padding: 10px 20px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 13px;
+            color: #6B7280;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .platform-tab-btn:hover {
+            color: #A78BFA;
+        }
+
+        .platform-tab-btn.active {
+            color: #fff;
+            background: rgba(124, 58, 237, 0.2);
+            border-color: rgba(124, 58, 237, 0.3);
+        }
     </style>
 </head>
 
@@ -398,12 +421,18 @@
                         </h1>
                         <p class="text-gray-400 mb-6">本地端影片字幕轉錄與翻譯工具</p>
 
-                        <!-- macOS Badge -->
-                        <div class="macos-badge mx-auto">
+                        <!-- Platform Badges -->
+                        <div id="hero-badge-macos" class="macos-badge mx-auto">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                             </svg>
                             Apple Silicon · macOS 14.0+
+                        </div>
+                        <div id="hero-badge-windows" class="macos-badge mx-auto hidden">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+                            </svg>
+                            Windows 10+ (64-bit)
                         </div>
                     </div>
                 </div>
@@ -413,6 +442,28 @@
         <!-- Installation Section -->
         <section class="py-16">
             <div class="container mx-auto px-6 max-w-4xl">
+                <!-- Platform Tab Navigation -->
+                <div class="flex justify-center gap-2 mb-8 animate-in delay-2">
+                    <button class="platform-tab-btn active" onclick="switchPlatform('macos')">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                            </svg>
+                            macOS
+                        </span>
+                    </button>
+                    <button class="platform-tab-btn" onclick="switchPlatform('windows')">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+                            </svg>
+                            Windows
+                        </span>
+                    </button>
+                </div>
+
+                <!-- macOS Installation -->
+                <div id="platform-macos">
                 <!-- Tab Navigation -->
                 <div class="flex justify-center gap-2 mb-8 animate-in delay-3">
                     <button class="tab-btn active" onclick="switchTab('quick')">
@@ -445,7 +496,7 @@
                         <div class="terminal-body relative">
                             <div class="pr-24">
                                 <span class="terminal-prompt">$ </span>
-                                <span class="terminal-command" id="quick-install-code">curl -L https://github.com/cashwu/WhispifyApp/releases/latest/download/Whispify.zip -o ~/Downloads/Whispify.zip && unzip -o ~/Downloads/Whispify.zip -d /Applications && xattr -cr /Applications/Whispify.app && open /Applications/Whispify.app</span>
+                                <span class="terminal-command" id="quick-install-code">curl -L https://github.com/cashwu/WhispifyApp/releases/download/1.0.8/Whispify.zip -o ~/Downloads/Whispify.zip && unzip -o ~/Downloads/Whispify.zip -d /Applications && xattr -cr /Applications/Whispify.app && open /Applications/Whispify.app</span>
                             </div>
                             <button class="copy-btn" onclick="copyCode('quick-install-code', this)">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -472,7 +523,7 @@
                                 <div class="flex-1 pt-2">
                                     <h3 class="font-semibold text-white mb-2">下載安裝檔</h3>
                                     <p class="text-gray-400 text-sm mb-4">前往 GitHub Releases 頁面下載最新的 <span class="inline-code">.dmg</span> 檔案</p>
-                                    <a href="https://github.com/cashwu/WhispifyApp/releases/latest"
+                                    <a href="https://github.com/cashwu/WhispifyApp/releases/tag/1.0.8"
                                         target="_blank" rel="noopener noreferrer"
                                         class="inline-flex items-center gap-2 text-sm text-violet-400 hover:text-violet-300 transition-colors">
                                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -541,6 +592,53 @@
                         </div>
                     </div>
                 </div>
+                </div><!-- end platform-macos -->
+
+                <!-- Windows Installation -->
+                <div id="platform-windows" class="hidden">
+                    <div class="grid gap-4">
+                        <!-- Step 1 -->
+                        <div class="step-card">
+                            <div class="flex gap-5">
+                                <div class="step-number">1</div>
+                                <div class="flex-1 pt-2">
+                                    <h3 class="font-semibold text-white mb-2">下載安裝檔</h3>
+                                    <p class="text-gray-400 text-sm mb-4">前往 GitHub Releases 頁面下載最新的 <span class="inline-code">.exe</span> 安裝程式</p>
+                                    <a href="https://github.com/cashwu/WhispifyApp/releases/tag/win-1.0.0"
+                                        target="_blank" rel="noopener noreferrer"
+                                        class="inline-flex items-center gap-2 text-sm text-violet-400 hover:text-violet-300 transition-colors">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        GitHub Releases →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="step-card">
+                            <div class="flex gap-5">
+                                <div class="step-number">2</div>
+                                <div class="flex-1 pt-2">
+                                    <h3 class="font-semibold text-white mb-2">執行安裝程式</h3>
+                                    <p class="text-gray-400 text-sm">雙擊 <span class="inline-code">.exe</span> 安裝程式，依照指示完成安裝。支援繁體中文與英文語言選擇。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="step-card">
+                            <div class="flex gap-5">
+                                <div class="step-number">3</div>
+                                <div class="flex-1 pt-2">
+                                    <h3 class="font-semibold text-white mb-2">開始使用</h3>
+                                    <p class="text-gray-400 text-sm">從開始選單或桌面捷徑啟動 Whispify</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Back Link -->
                 <div class="text-center mt-16">
@@ -588,6 +686,20 @@
     </footer>
 
     <script>
+        function switchPlatform(platform) {
+            // Update platform tab buttons
+            document.querySelectorAll('.platform-tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Toggle platform content
+            document.getElementById('platform-macos').classList.toggle('hidden', platform !== 'macos');
+            document.getElementById('platform-windows').classList.toggle('hidden', platform !== 'windows');
+
+            // Toggle hero badges
+            document.getElementById('hero-badge-macos').classList.toggle('hidden', platform !== 'macos');
+            document.getElementById('hero-badge-windows').classList.toggle('hidden', platform !== 'windows');
+        }
+
         function switchTab(tab) {
             // Update tab buttons
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
