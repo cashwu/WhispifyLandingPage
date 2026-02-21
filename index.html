@@ -1577,14 +1577,14 @@
                         </ul>
 
                         <div class="relative group">
-                            <button onclick="showComingSoon(this)"
-                                class="w-full btn-gradient py-4 rounded-xl font-semibold text-white cursor-not-allowed opacity-90 transition-all duration-300">
+                            <button onclick="window.open('https://www.facebook.com/cashwugeek/', '_blank')"
+                                class="w-full btn-gradient py-4 rounded-xl font-semibold text-white opacity-90 transition-all duration-300">
                                 升級專業版
                             </button>
                             <!-- Hover Tooltip -->
                             <div
                                 class="absolute -top-12 left-1/2 -translate-x-1/2 px-4 py-2 bg-violet-600 text-white text-sm font-semibold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
-                                即將推出
+                                請私訊粉絲專頁
                                 <div
                                     class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-violet-600">
                                 </div>
@@ -1857,37 +1857,7 @@
             }
         });
 
-        // Coming Soon Modal
-        function showComingSoon(btn) {
-            const modal = document.getElementById('coming-soon-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            // Auto close after 2 seconds
-            setTimeout(() => {
-                closeComingSoon();
-            }, 2000);
-        }
-
-        function closeComingSoon() {
-            const modal = document.getElementById('coming-soon-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
     </script>
-
-    <!-- Coming Soon Modal -->
-    <div id="coming-soon-modal"
-        class="hidden fixed inset-0 z-50 items-center justify-center bg-black/60 backdrop-blur-sm"
-        onclick="closeComingSoon()">
-        <div class="text-center animate-fade-in-scale" onclick="event.stopPropagation()">
-            <div
-                class="bg-gradient-to-br from-dark-elevated to-dark-primary border border-violet-500/30 rounded-3xl px-12 py-10 shadow-2xl shadow-violet-500/20">
-                <div class="text-6xl mb-4">🚀</div>
-                <h3 class="text-3xl font-display font-bold gradient-text mb-2">即將推出</h3>
-                <p class="text-gray-400">敬請期待！</p>
-            </div>
-        </div>
-    </div>
 
     <!-- Typewriter Effect Script -->
     <script>
