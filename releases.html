@@ -465,14 +465,14 @@
                 <div id="releases-macos">
                 <!-- Latest Version Hero -->
                 <div class="max-w-4xl mx-auto mt-16 animate-in delay-1">
-                    <div id="v1.1.0" class="latest-card rounded-3xl p-8 md:p-12">
+                    <div id="v1.1.1" class="latest-card rounded-3xl p-8 md:p-12">
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
                             <div>
                                 <p class="font-mono text-xs text-gray-500 uppercase tracking-wider mb-2">Current Version</p>
-                                <div class="version-hero">1.1.0</div>
+                                <div class="version-hero">1.1.1</div>
                             </div>
                             <div class="flex flex-col items-start md:items-end gap-2">
-                                <span class="font-mono text-sm text-gray-400">2026.02.24</span>
+                                <span class="font-mono text-sm text-gray-400">2026.02.27</span>
                                 <span class="font-mono text-xs text-gray-600">Apple Silicon · macOS 14.0+</span>
                             </div>
                         </div>
@@ -480,14 +480,16 @@
                         <!-- Latest Release Content -->
                         <div class="border-t border-violet-500/20 pt-8">
                             <div class="grid md:grid-cols-1 gap-6">
-                                <!-- New -->
                                 <div>
                                     <div class="flex items-center gap-2 mb-4">
-                                        <span class="change-tag tag-new">新功能</span>
+                                        <span class="change-tag tag-fixed">修復</span>
+                                        <span class="change-tag tag-improved">改進</span>
                                     </div>
                                     <div class="release-content">
                                         <ul>
-                                            <li><strong>Groq 轉錄模型</strong> — 支援 groq 轉錄模型</li>
+                                            <li><strong>修正重新轉錄時判斷音訊檔案的問題</strong></li>
+                                            <li><strong>調整 groq 轉錄時分段的行為</strong></li>
+                                            <li><strong>調整轉錄畫面跑版</strong></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -495,7 +497,7 @@
 
                             <!-- GitHub Link -->
                             <div class="mt-8 pt-6 border-t border-violet-500/10">
-                                <a href="https://github.com/cashwu/WhispifyApp/releases/tag/1.1.0"
+                                <a href="https://github.com/cashwu/WhispifyApp/releases/tag/1.1.1"
                                     target="_blank" rel="noopener noreferrer"
                                     class="github-link inline-flex items-center gap-2 text-sm text-gray-400 hover:text-violet-400 transition-colors">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -571,6 +573,29 @@
                 </div>
 
                 <div class="space-y-3">
+                    <!-- v1.1.0 -->
+                    <details class="changelog-entry rounded-xl animate-in delay-2" id="v1.1.0">
+                        <summary class="p-5 flex flex-col sm:flex-row sm:items-center gap-3">
+                            <div class="flex items-center gap-3 flex-wrap flex-1 min-w-0">
+                                <span class="version-badge text-xl text-white">v1.1.0</span>
+                                <span class="font-mono text-xs text-gray-500">2026.02.24</span>
+                            </div>
+                            <div class="flex items-center gap-2 flex-wrap shrink-0">
+                                <span class="change-tag tag-new">新功能</span>
+                                <svg class="expand-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </summary>
+                        <div class="px-5 pb-5">
+                            <div class="release-content pt-4 border-t border-violet-500/10">
+                                <ul>
+                                    <li><strong>Groq 轉錄模型</strong> — 支援 groq 轉錄模型</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+
                     <!-- v1.0.10 -->
                     <details class="changelog-entry rounded-xl animate-in delay-2" id="v1.0.10">
                         <summary class="p-5 flex flex-col sm:flex-row sm:items-center gap-3">
